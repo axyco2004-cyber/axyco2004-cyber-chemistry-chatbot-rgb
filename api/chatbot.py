@@ -114,9 +114,23 @@ Try asking me something like "What is the atomic mass of Gold?" or "Calculate mo
     
     # Element information queries
     if "element" in message_lower or "atomic" in message_lower or any(word in message_lower for word in ["tell me about", "what is", "info about", "information about"]):
-        for symbol in PERIODIC_TABLE.keys():
-            if symbol.lower() in message_lower or PERIODIC_TABLE[symbol]["name"].lower() in message_lower:
+        # First check for element names (more specific)
+        for symbol, data in PERIODIC_TABLE.items():
+            element_name = data["name"].lower()
+            # Use word boundary matching for element names
+            if re.search(r'\b' + re.escape(element_name) + r'\b', message_lower):
                 return get_element_info(symbol)
+        
+        # Then check for element symbols (with word boundaries for short symbols)
+        for symbol in PERIODIC_TABLE.keys():
+            # For single-letter symbols, require word boundaries
+            if len(symbol) == 1:
+                if re.search(r'\b' + symbol.lower() + r'\b', message_lower):
+                    return get_element_info(symbol)
+            else:
+                # For multi-letter symbols, simple substring is okay
+                if symbol.lower() in message_lower:
+                    return get_element_info(symbol)
     
     # Molar mass calculation
     if "molar mass" in message_lower or "molecular mass" in message_lower or "molecular weight" in message_lower:
