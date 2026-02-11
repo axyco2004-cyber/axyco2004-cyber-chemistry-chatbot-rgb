@@ -327,6 +327,7 @@
         // Enable sending message with Enter key
         messageInput.addEventListener('keypress', function(e) {
             if (e.key === 'Enter' && !sendButton.disabled) {
+                e.preventDefault();
                 sendMessage();
             }
         });

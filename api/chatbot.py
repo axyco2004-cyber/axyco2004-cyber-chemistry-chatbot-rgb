@@ -51,7 +51,7 @@ def calculate_molar_mass(formula):
     i = 0
     while i < len(formula):
         # Match element symbol (uppercase followed by optional lowercase)
-        if i < len(formula) and formula[i].isupper():
+        if formula[i].isupper():
             element = formula[i]
             i += 1
             if i < len(formula) and formula[i].islower():
@@ -92,6 +92,9 @@ def get_element_info(element_symbol):
     return None
 
 
+ELEMENT_QUERY_TRIGGERS = ["tell me about", "what is", "info about", "information about"]
+
+
 def process_chemistry_query(message):
     """Process chemistry-related queries and return appropriate responses."""
     message_lower = message.lower()
@@ -113,7 +116,7 @@ def process_chemistry_query(message):
 Try asking me something like "What is the atomic mass of Gold?" or "Calculate molar mass of NaCl"!"""
     
     # Element information queries
-    if "element" in message_lower or "atomic" in message_lower or any(word in message_lower for word in ["tell me about", "what is", "info about", "information about"]):
+    if "element" in message_lower or "atomic" in message_lower or any(word in message_lower for word in ELEMENT_QUERY_TRIGGERS):
         # First check for element names (more specific)
         for symbol, data in PERIODIC_TABLE.items():
             element_name = data["name"].lower()
