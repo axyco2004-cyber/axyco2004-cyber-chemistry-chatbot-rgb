@@ -11,7 +11,7 @@ from colorama import Fore, Style, init
 init(autoreset=True)
 
 
-# Built-in periodic table data (30+ common elements)
+# Built-in periodic table data (33 common elements)
 PERIODIC_TABLE = {
     "H": {
         "name": "Hydrogen",
@@ -446,20 +446,15 @@ class ChemistryChatbot:
             match = re.search(pattern, query)
             if match:
                 formula = match.group(1)
-                # Capitalize first letter of each element symbol
-                # Convert to proper case for formulas like "h2o" -> "H2O"
+                # Capitalize element symbols properly for formulas like "h2o" -> "H2O", "nacl" -> "NaCl"
+                # This handles two-letter elements (like Cl, Na) and single-letter elements (like H, O)
                 formula_proper = ""
-                i = 0
-                while i < len(formula):
-                    if formula[i].isalpha():
-                        formula_proper += formula[i].upper()
-                        i += 1
-                        if i < len(formula) and formula[i].islower():
-                            formula_proper += formula[i]
-                            i += 1
+                for char in formula:
+                    if char.isalpha() and (not formula_proper or not formula_proper[-1].isupper() or formula_proper[-1].isdigit()):
+                        # Start of a new element symbol
+                        formula_proper += char.upper()
                     else:
-                        formula_proper += formula[i]
-                        i += 1
+                        formula_proper += char
                 
                 self.calculate_molar_mass(formula_proper)
                 return True
