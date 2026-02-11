@@ -1,0 +1,2 @@
+# No additional Python dependencies required
+# The chatbot uses only Python standard library modules
