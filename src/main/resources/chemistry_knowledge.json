@@ -1,0 +1,598 @@
+{
+  "topics": [
+    {
+      "name": "Atomic Structure",
+      "description": "Understanding atoms, electrons, protons, and neutrons",
+      "qaPairs": [
+        {
+          "questions": [
+            "What is an atom?",
+            "Define atom",
+            "What are atoms?"
+          ],
+          "answer": "An atom is the smallest unit of matter that retains the properties of an element. It consists of a nucleus containing protons and neutrons, surrounded by electrons in energy levels or shells.",
+          "keywords": ["atom", "atomic", "matter", "element"]
+        },
+        {
+          "questions": [
+            "What is a proton?",
+            "What are protons?",
+            "Define proton"
+          ],
+          "answer": "A proton is a subatomic particle found in the nucleus of an atom. It has a positive electric charge (+1) and a mass of approximately 1 atomic mass unit (amu). The number of protons defines the element's atomic number.",
+          "keywords": ["proton", "positive", "nucleus", "charge"]
+        },
+        {
+          "questions": [
+            "What is a neutron?",
+            "What are neutrons?",
+            "Define neutron"
+          ],
+          "answer": "A neutron is a subatomic particle found in the nucleus of an atom. It has no electric charge (neutral) and a mass slightly greater than a proton (approximately 1 amu). Neutrons help stabilize the nucleus.",
+          "keywords": ["neutron", "neutral", "nucleus", "mass"]
+        },
+        {
+          "questions": [
+            "What is an electron?",
+            "What are electrons?",
+            "Define electron"
+          ],
+          "answer": "An electron is a subatomic particle that orbits the nucleus of an atom. It has a negative electric charge (-1) and negligible mass compared to protons and neutrons. Electrons determine how atoms bond with each other.",
+          "keywords": ["electron", "negative", "charge", "orbit", "shell"]
+        },
+        {
+          "questions": [
+            "What is atomic number?",
+            "Define atomic number",
+            "How do you find atomic number?"
+          ],
+          "answer": "The atomic number is the number of protons in the nucleus of an atom. It uniquely identifies a chemical element and determines its position in the periodic table. For a neutral atom, the atomic number also equals the number of electrons.",
+          "keywords": ["atomic number", "proton", "element", "identify"]
+        },
+        {
+          "questions": [
+            "What is mass number?",
+            "Define mass number",
+            "How to calculate mass number?"
+          ],
+          "answer": "The mass number is the total number of protons and neutrons in an atom's nucleus. It is calculated as: Mass Number = Protons + Neutrons. Mass number determines the isotope of an element.",
+          "keywords": ["mass number", "proton", "neutron", "isotope"]
+        },
+        {
+          "questions": [
+            "What are isotopes?",
+            "Define isotope",
+            "What is an isotope?"
+          ],
+          "answer": "Isotopes are atoms of the same element that have the same number of protons but different numbers of neutrons. They have the same atomic number but different mass numbers. Example: Carbon-12 and Carbon-14 are isotopes of carbon.",
+          "keywords": ["isotope", "neutron", "same element", "different mass"]
+        }
+      ]
+    },
+    {
+      "name": "Periodic Table",
+      "description": "Elements, groups, periods, and properties",
+      "qaPairs": [
+        {
+          "questions": [
+            "What is the periodic table?",
+            "Define periodic table",
+            "What does the periodic table show?"
+          ],
+          "answer": "The periodic table is an organized arrangement of all known chemical elements in order of increasing atomic number. Elements are arranged in rows (periods) and columns (groups) based on their chemical properties and electron configurations.",
+          "keywords": ["periodic table", "element", "organize", "arrange"]
+        },
+        {
+          "questions": [
+            "What is a group in the periodic table?",
+            "What are groups?",
+            "Define group"
+          ],
+          "answer": "A group (or family) is a vertical column in the periodic table. Elements in the same group have similar chemical properties because they have the same number of valence electrons. There are 18 groups in the modern periodic table.",
+          "keywords": ["group", "column", "vertical", "similar properties"]
+        },
+        {
+          "questions": [
+            "What is a period in the periodic table?",
+            "What are periods?",
+            "Define period"
+          ],
+          "answer": "A period is a horizontal row in the periodic table. There are 7 periods. Elements in the same period have the same number of electron shells, but their properties vary as you move across the period.",
+          "keywords": ["period", "row", "horizontal", "electron shell"]
+        },
+        {
+          "questions": [
+            "What are metals?",
+            "Define metals",
+            "Properties of metals"
+          ],
+          "answer": "Metals are elements that are typically shiny, conduct heat and electricity well, are malleable (can be hammered into sheets), and ductile (can be drawn into wires). They tend to lose electrons in chemical reactions. Examples: iron, copper, gold.",
+          "keywords": ["metal", "conduct", "malleable", "ductile", "shiny"]
+        },
+        {
+          "questions": [
+            "What are nonmetals?",
+            "Define nonmetals",
+            "Properties of nonmetals"
+          ],
+          "answer": "Nonmetals are elements that generally lack metallic properties. They are poor conductors of heat and electricity, are brittle in solid form, and tend to gain electrons in chemical reactions. Examples: oxygen, nitrogen, carbon, sulfur.",
+          "keywords": ["nonmetal", "poor conductor", "brittle", "gain electrons"]
+        },
+        {
+          "questions": [
+            "What are noble gases?",
+            "Define noble gases",
+            "What is Group 18?"
+          ],
+          "answer": "Noble gases are the elements in Group 18 of the periodic table. They are helium, neon, argon, krypton, xenon, and radon. They are very unreactive because they have complete outer electron shells. They are colorless, odorless gases at room temperature.",
+          "keywords": ["noble gas", "group 18", "unreactive", "inert", "helium", "neon"]
+        },
+        {
+          "questions": [
+            "What are valence electrons?",
+            "Define valence electrons",
+            "What are outer electrons?"
+          ],
+          "answer": "Valence electrons are the electrons in the outermost energy level (shell) of an atom. They are responsible for the chemical properties of an element and determine how atoms bond with each other. Elements in the same group have the same number of valence electrons.",
+          "keywords": ["valence", "outer", "electron", "bonding", "chemical properties"]
+        }
+      ]
+    },
+    {
+      "name": "Chemical Bonding",
+      "description": "Ionic, covalent, and metallic bonds",
+      "qaPairs": [
+        {
+          "questions": [
+            "What is a chemical bond?",
+            "Define chemical bond",
+            "What are chemical bonds?"
+          ],
+          "answer": "A chemical bond is a force of attraction that holds atoms or ions together in a compound or molecule. Bonds form when atoms share or transfer electrons to achieve a stable electron configuration. The three main types are ionic, covalent, and metallic bonds.",
+          "keywords": ["chemical bond", "attraction", "electron", "compound"]
+        },
+        {
+          "questions": [
+            "What is an ionic bond?",
+            "Define ionic bond",
+            "What are ionic bonds?"
+          ],
+          "answer": "An ionic bond is a chemical bond formed by the electrostatic attraction between oppositely charged ions. It occurs when one atom transfers electrons to another, creating positive cations and negative anions. Ionic bonds typically form between metals and nonmetals. Example: NaCl (sodium chloride).",
+          "keywords": ["ionic", "bond", "electron transfer", "cation", "anion", "attraction"]
+        },
+        {
+          "questions": [
+            "What is a covalent bond?",
+            "Define covalent bond",
+            "What are covalent bonds?"
+          ],
+          "answer": "A covalent bond is a chemical bond formed when two atoms share one or more pairs of electrons. Covalent bonds typically form between nonmetal atoms. They can be single (one pair), double (two pairs), or triple bonds (three pairs). Example: H2O (water) has covalent bonds.",
+          "keywords": ["covalent", "bond", "share", "electron", "nonmetal"]
+        },
+        {
+          "questions": [
+            "What is a metallic bond?",
+            "Define metallic bond",
+            "What are metallic bonds?"
+          ],
+          "answer": "A metallic bond is a chemical bond found in metals where electrons are delocalized and free to move throughout the metal structure. This 'sea of electrons' model explains why metals conduct electricity and are malleable. The positive metal ions are held together by the mobile electrons.",
+          "keywords": ["metallic", "bond", "electron sea", "delocalized", "metal"]
+        },
+        {
+          "questions": [
+            "What is electronegativity?",
+            "Define electronegativity",
+            "What does electronegativity mean?"
+          ],
+          "answer": "Electronegativity is a measure of an atom's ability to attract electrons in a chemical bond. It increases from left to right across a period and decreases down a group in the periodic table. Fluorine is the most electronegative element. Differences in electronegativity determine bond polarity.",
+          "keywords": ["electronegativity", "attract", "electron", "polarity", "fluorine"]
+        },
+        {
+          "questions": [
+            "What is a polar bond?",
+            "Define polar bond",
+            "What are polar covalent bonds?"
+          ],
+          "answer": "A polar bond (or polar covalent bond) is a covalent bond where electrons are shared unequally between atoms due to a difference in electronegativity. This creates partial positive and negative charges on the atoms. Example: The O-H bond in water is polar.",
+          "keywords": ["polar", "bond", "unequal", "electronegativity", "partial charge"]
+        }
+      ]
+    },
+    {
+      "name": "Chemical Reactions",
+      "description": "Types of reactions and balancing equations",
+      "qaPairs": [
+        {
+          "questions": [
+            "What is a chemical reaction?",
+            "Define chemical reaction",
+            "What happens in a chemical reaction?"
+          ],
+          "answer": "A chemical reaction is a process where one or more substances (reactants) are transformed into different substances (products) through the breaking and forming of chemical bonds. Chemical reactions involve energy changes and are represented by chemical equations.",
+          "keywords": ["chemical reaction", "reactant", "product", "transform", "equation"]
+        },
+        {
+          "questions": [
+            "What is a synthesis reaction?",
+            "Define synthesis reaction",
+            "What is a combination reaction?"
+          ],
+          "answer": "A synthesis reaction (or combination reaction) is a type of chemical reaction where two or more simple substances combine to form a more complex product. The general form is: A + B → AB. Example: 2H2 + O2 → 2H2O (formation of water).",
+          "keywords": ["synthesis", "combination", "combine", "form", "product"]
+        },
+        {
+          "questions": [
+            "What is a decomposition reaction?",
+            "Define decomposition reaction",
+            "What is decomposition?"
+          ],
+          "answer": "A decomposition reaction is a type of chemical reaction where a complex substance breaks down into two or more simpler substances. The general form is: AB → A + B. Example: 2H2O → 2H2 + O2 (electrolysis of water).",
+          "keywords": ["decomposition", "break down", "separate", "split"]
+        },
+        {
+          "questions": [
+            "What is a single replacement reaction?",
+            "Define single displacement reaction",
+            "What is single replacement?"
+          ],
+          "answer": "A single replacement (or single displacement) reaction is a type of chemical reaction where one element replaces another element in a compound. The general form is: A + BC → AC + B. Example: Zn + 2HCl → ZnCl2 + H2.",
+          "keywords": ["single replacement", "single displacement", "replace", "substitute"]
+        },
+        {
+          "questions": [
+            "What is a double replacement reaction?",
+            "Define double displacement reaction",
+            "What is double replacement?"
+          ],
+          "answer": "A double replacement (or double displacement) reaction is a type of chemical reaction where two compounds exchange ions to form two new compounds. The general form is: AB + CD → AD + CB. Example: NaCl + AgNO3 → NaNO3 + AgCl.",
+          "keywords": ["double replacement", "double displacement", "exchange", "swap"]
+        },
+        {
+          "questions": [
+            "How do you balance a chemical equation?",
+            "Balance chemical equations",
+            "What is balancing equations?"
+          ],
+          "answer": "To balance a chemical equation, adjust the coefficients (numbers in front of formulas) so that the number of atoms of each element is equal on both sides of the equation. Never change subscripts. Steps: 1) Count atoms on each side, 2) Add coefficients to balance, 3) Check your work. Example: H2 + O2 → H2O becomes 2H2 + O2 → 2H2O.",
+          "keywords": ["balance", "equation", "coefficient", "equal", "atoms"]
+        },
+        {
+          "questions": [
+            "What is a combustion reaction?",
+            "Define combustion",
+            "What is burning?"
+          ],
+          "answer": "A combustion reaction is a rapid reaction with oxygen that produces heat and light (fire). Complete combustion of hydrocarbons produces carbon dioxide and water. Example: CH4 + 2O2 → CO2 + 2H2O (burning methane).",
+          "keywords": ["combustion", "burn", "oxygen", "fire", "heat"]
+        }
+      ]
+    },
+    {
+      "name": "Acids, Bases, and pH",
+      "description": "Acid-base chemistry and pH scale",
+      "qaPairs": [
+        {
+          "questions": [
+            "What is an acid?",
+            "Define acid",
+            "What are acids?"
+          ],
+          "answer": "An acid is a substance that produces hydrogen ions (H+) when dissolved in water. Acids have a sour taste, turn blue litmus paper red, and have a pH less than 7. Strong acids completely dissociate in water. Examples: HCl (hydrochloric acid), H2SO4 (sulfuric acid).",
+          "keywords": ["acid", "hydrogen", "H+", "sour", "pH", "litmus"]
+        },
+        {
+          "questions": [
+            "What is a base?",
+            "Define base",
+            "What are bases?"
+          ],
+          "answer": "A base is a substance that produces hydroxide ions (OH-) when dissolved in water. Bases have a bitter taste, feel slippery, turn red litmus paper blue, and have a pH greater than 7. Strong bases completely dissociate in water. Examples: NaOH (sodium hydroxide), KOH (potassium hydroxide).",
+          "keywords": ["base", "hydroxide", "OH-", "bitter", "slippery", "pH", "litmus"]
+        },
+        {
+          "questions": [
+            "What is pH?",
+            "Define pH",
+            "What is the pH scale?"
+          ],
+          "answer": "pH is a measure of how acidic or basic a solution is. The pH scale ranges from 0 to 14. pH 7 is neutral (like pure water), pH less than 7 is acidic, and pH greater than 7 is basic (alkaline). Each unit represents a 10-fold difference in hydrogen ion concentration. pH = -log[H+].",
+          "keywords": ["pH", "scale", "acidic", "basic", "neutral", "logarithm"]
+        },
+        {
+          "questions": [
+            "What is neutralization?",
+            "Define neutralization reaction",
+            "What is acid-base neutralization?"
+          ],
+          "answer": "A neutralization reaction occurs when an acid and a base react to form water and a salt. The H+ from the acid combines with the OH- from the base to form H2O. The general form is: Acid + Base → Salt + Water. Example: HCl + NaOH → NaCl + H2O.",
+          "keywords": ["neutralization", "acid", "base", "salt", "water", "reaction"]
+        },
+        {
+          "questions": [
+            "What is an indicator?",
+            "Define pH indicator",
+            "What are indicators?"
+          ],
+          "answer": "An indicator is a substance that changes color depending on the pH of the solution. Common indicators include litmus paper (red in acid, blue in base), phenolphthalein (colorless in acid, pink in base), and universal indicator (shows a range of colors across the pH scale).",
+          "keywords": ["indicator", "color", "change", "litmus", "phenolphthalein", "pH"]
+        },
+        {
+          "questions": [
+            "What is a strong acid?",
+            "Define strong acid",
+            "Examples of strong acids"
+          ],
+          "answer": "A strong acid is an acid that completely dissociates (ionizes) into ions in water. Common strong acids include: HCl (hydrochloric), HNO3 (nitric), H2SO4 (sulfuric), HBr (hydrobromic), HI (hydroiodic), and HClO4 (perchloric).",
+          "keywords": ["strong acid", "dissociate", "ionize", "complete", "HCl"]
+        },
+        {
+          "questions": [
+            "What is a weak acid?",
+            "Define weak acid",
+            "Examples of weak acids"
+          ],
+          "answer": "A weak acid is an acid that only partially dissociates into ions in water. Most of the acid molecules remain intact. Examples include acetic acid (CH3COOH) in vinegar, citric acid in citrus fruits, and carbonic acid (H2CO3).",
+          "keywords": ["weak acid", "partial", "dissociate", "acetic", "citric"]
+        }
+      ]
+    },
+    {
+      "name": "Stoichiometry",
+      "description": "Quantitative relationships in chemical reactions",
+      "qaPairs": [
+        {
+          "questions": [
+            "What is stoichiometry?",
+            "Define stoichiometry",
+            "What does stoichiometry mean?"
+          ],
+          "answer": "Stoichiometry is the study of quantitative relationships between reactants and products in chemical reactions. It allows us to calculate how much of each substance is needed or produced in a reaction using balanced chemical equations and molar ratios.",
+          "keywords": ["stoichiometry", "quantitative", "mole", "ratio", "calculate"]
+        },
+        {
+          "questions": [
+            "What is a mole?",
+            "Define mole",
+            "What is Avogadro's number?"
+          ],
+          "answer": "A mole (mol) is a unit of measurement for amount of substance. One mole contains exactly 6.022 × 10^23 particles (Avogadro's number). This applies to atoms, molecules, ions, or any other particles. One mole of any substance has a mass in grams equal to its atomic or molecular mass.",
+          "keywords": ["mole", "avogadro", "6.022", "particles", "amount"]
+        },
+        {
+          "questions": [
+            "What is molar mass?",
+            "Define molar mass",
+            "How to calculate molar mass?"
+          ],
+          "answer": "Molar mass is the mass of one mole of a substance, expressed in grams per mole (g/mol). To calculate molar mass, add up the atomic masses of all atoms in the chemical formula. Example: H2O has molar mass = (2 × 1.008) + (1 × 16.00) = 18.016 g/mol.",
+          "keywords": ["molar mass", "gram", "mole", "atomic mass", "calculate"]
+        },
+        {
+          "questions": [
+            "What is the limiting reactant?",
+            "Define limiting reagent",
+            "What is limiting reactant?"
+          ],
+          "answer": "The limiting reactant (or limiting reagent) is the reactant that is completely used up first in a chemical reaction. It limits the amount of product that can be formed. The other reactants present in excess are called excess reactants.",
+          "keywords": ["limiting", "reactant", "reagent", "used up", "limit", "product"]
+        },
+        {
+          "questions": [
+            "What is percent yield?",
+            "Define percent yield",
+            "How to calculate percent yield?"
+          ],
+          "answer": "Percent yield is the ratio of actual yield (what you actually get) to theoretical yield (what you should get based on stoichiometry), expressed as a percentage. Percent Yield = (Actual Yield / Theoretical Yield) × 100%. Percent yield is always less than or equal to 100% due to losses and side reactions.",
+          "keywords": ["percent yield", "actual", "theoretical", "efficiency", "calculate"]
+        },
+        {
+          "questions": [
+            "How do you convert moles to grams?",
+            "Convert moles to mass",
+            "Mole to gram conversion"
+          ],
+          "answer": "To convert moles to grams, multiply the number of moles by the molar mass: Mass (g) = Moles (mol) × Molar Mass (g/mol). Example: 2 moles of H2O = 2 mol × 18.016 g/mol = 36.032 g.",
+          "keywords": ["convert", "mole", "gram", "mass", "molar mass"]
+        }
+      ]
+    },
+    {
+      "name": "States of Matter and Gas Laws",
+      "description": "Solid, liquid, gas phases and gas behavior",
+      "qaPairs": [
+        {
+          "questions": [
+            "What are the states of matter?",
+            "Define states of matter",
+            "What are the three states?"
+          ],
+          "answer": "The three main states of matter are solid, liquid, and gas. Solids have definite shape and volume with particles tightly packed. Liquids have definite volume but take the shape of their container with particles close but able to move. Gases have neither definite shape nor volume with particles far apart and moving freely.",
+          "keywords": ["states", "matter", "solid", "liquid", "gas", "phase"]
+        },
+        {
+          "questions": [
+            "What is Boyle's Law?",
+            "Define Boyle's Law",
+            "Pressure volume relationship"
+          ],
+          "answer": "Boyle's Law states that for a fixed amount of gas at constant temperature, the pressure and volume are inversely proportional. As pressure increases, volume decreases, and vice versa. Mathematical form: P1V1 = P2V2, where P is pressure and V is volume.",
+          "keywords": ["boyle", "law", "pressure", "volume", "inverse", "P1V1"]
+        },
+        {
+          "questions": [
+            "What is Charles's Law?",
+            "Define Charles's Law",
+            "Temperature volume relationship"
+          ],
+          "answer": "Charles's Law states that for a fixed amount of gas at constant pressure, the volume is directly proportional to the absolute temperature (in Kelvin). As temperature increases, volume increases. Mathematical form: V1/T1 = V2/T2, where V is volume and T is temperature in Kelvin.",
+          "keywords": ["charles", "law", "temperature", "volume", "direct", "kelvin"]
+        },
+        {
+          "questions": [
+            "What is the Ideal Gas Law?",
+            "Define Ideal Gas Law",
+            "What is PV=nRT?"
+          ],
+          "answer": "The Ideal Gas Law combines the gas laws into one equation: PV = nRT, where P is pressure, V is volume, n is moles of gas, R is the gas constant (0.0821 L·atm/mol·K), and T is temperature in Kelvin. This equation describes the behavior of ideal gases.",
+          "keywords": ["ideal", "gas", "law", "PV", "nRT", "equation"]
+        },
+        {
+          "questions": [
+            "What is pressure?",
+            "Define pressure",
+            "What is gas pressure?"
+          ],
+          "answer": "Pressure is the force exerted per unit area. In gases, pressure results from gas molecules colliding with the walls of their container. Pressure is measured in various units including atmospheres (atm), pascals (Pa), torr, and mmHg. Standard pressure is 1 atm = 101.325 kPa = 760 torr.",
+          "keywords": ["pressure", "force", "area", "atm", "pascal", "gas"]
+        },
+        {
+          "questions": [
+            "What is STP?",
+            "Define STP",
+            "What is standard temperature and pressure?"
+          ],
+          "answer": "STP stands for Standard Temperature and Pressure. It is defined as a temperature of 0°C (273.15 K) and a pressure of 1 atmosphere (atm). At STP, one mole of any ideal gas occupies 22.4 liters. STP is used as a reference point for gas calculations.",
+          "keywords": ["STP", "standard", "temperature", "pressure", "0C", "273K", "22.4"]
+        }
+      ]
+    },
+    {
+      "name": "Organic Chemistry Basics",
+      "description": "Introduction to carbon compounds and hydrocarbons",
+      "qaPairs": [
+        {
+          "questions": [
+            "What is organic chemistry?",
+            "Define organic chemistry",
+            "What does organic chemistry study?"
+          ],
+          "answer": "Organic chemistry is the study of carbon-containing compounds. Carbon can form four covalent bonds and create long chains and rings, leading to an enormous variety of molecules. Organic compounds include hydrocarbons, alcohols, carbohydrates, proteins, and plastics.",
+          "keywords": ["organic", "chemistry", "carbon", "compound", "molecule"]
+        },
+        {
+          "questions": [
+            "What is a hydrocarbon?",
+            "Define hydrocarbon",
+            "What are hydrocarbons?"
+          ],
+          "answer": "A hydrocarbon is an organic compound composed only of carbon and hydrogen atoms. They are the simplest organic compounds. Hydrocarbons are classified as alkanes (single bonds), alkenes (double bonds), and alkynes (triple bonds). Examples: methane (CH4), ethene (C2H4), ethyne (C2H2).",
+          "keywords": ["hydrocarbon", "carbon", "hydrogen", "organic", "alkane", "alkene"]
+        },
+        {
+          "questions": [
+            "What is an alkane?",
+            "Define alkane",
+            "What are saturated hydrocarbons?"
+          ],
+          "answer": "An alkane is a saturated hydrocarbon containing only single bonds between carbon atoms. Alkanes have the general formula CnH2n+2. They are relatively unreactive. Examples: methane (CH4), ethane (C2H6), propane (C3H8), butane (C4H10).",
+          "keywords": ["alkane", "saturated", "single bond", "methane", "ethane", "CnH2n+2"]
+        },
+        {
+          "questions": [
+            "What is an alkene?",
+            "Define alkene",
+            "What are unsaturated hydrocarbons?"
+          ],
+          "answer": "An alkene is an unsaturated hydrocarbon containing at least one carbon-carbon double bond (C=C). Alkenes have the general formula CnH2n. They are more reactive than alkanes. Examples: ethene (C2H4), propene (C3H6). Alkenes undergo addition reactions.",
+          "keywords": ["alkene", "unsaturated", "double bond", "ethene", "CnH2n", "reactive"]
+        },
+        {
+          "questions": [
+            "What is an alkyne?",
+            "Define alkyne",
+            "What are triple bond hydrocarbons?"
+          ],
+          "answer": "An alkyne is an unsaturated hydrocarbon containing at least one carbon-carbon triple bond (C≡C). Alkynes have the general formula CnH2n-2. They are even more reactive than alkenes. The simplest alkyne is ethyne (C2H2), also known as acetylene.",
+          "keywords": ["alkyne", "triple bond", "unsaturated", "ethyne", "acetylene", "CnH2n-2"]
+        },
+        {
+          "questions": [
+            "What is an isomer?",
+            "Define isomer",
+            "What are isomers?"
+          ],
+          "answer": "Isomers are compounds that have the same molecular formula but different structural arrangements of atoms. For example, butane (C4H10) has two isomers: n-butane (straight chain) and isobutane (branched chain). Isomers have different properties despite having the same molecular formula.",
+          "keywords": ["isomer", "same formula", "different structure", "arrangement"]
+        },
+        {
+          "questions": [
+            "What is a functional group?",
+            "Define functional group",
+            "What are functional groups?"
+          ],
+          "answer": "A functional group is a specific group of atoms within a molecule that determines the characteristic chemical reactions of that molecule. Common functional groups include: -OH (hydroxyl/alcohol), -COOH (carboxyl/acid), -NH2 (amino), -CHO (aldehyde), and -CO- (ketone).",
+          "keywords": ["functional", "group", "hydroxyl", "carboxyl", "amino", "reaction"]
+        }
+      ]
+    },
+    {
+      "name": "Solutions and Concentrations",
+      "description": "Mixtures, solutions, molarity, and concentration",
+      "qaPairs": [
+        {
+          "questions": [
+            "What is a solution?",
+            "Define solution",
+            "What are solutions?"
+          ],
+          "answer": "A solution is a homogeneous mixture of two or more substances. It consists of a solute (the substance being dissolved) dispersed uniformly in a solvent (the substance doing the dissolving). Solutions can be solid, liquid, or gas. Example: salt water (NaCl dissolved in H2O).",
+          "keywords": ["solution", "mixture", "solute", "solvent", "dissolve", "homogeneous"]
+        },
+        {
+          "questions": [
+            "What is a solute?",
+            "Define solute",
+            "What is the solute?"
+          ],
+          "answer": "A solute is the substance that is dissolved in a solution. It is present in smaller amount compared to the solvent. When a solute dissolves, its particles become dispersed throughout the solvent. Example: In salt water, salt (NaCl) is the solute.",
+          "keywords": ["solute", "dissolved", "smaller", "substance", "disperse"]
+        },
+        {
+          "questions": [
+            "What is a solvent?",
+            "Define solvent",
+            "What is the solvent?"
+          ],
+          "answer": "A solvent is the substance that dissolves the solute in a solution. It is usually present in greater amount. Water is called the 'universal solvent' because it dissolves many substances. Example: In salt water, water (H2O) is the solvent.",
+          "keywords": ["solvent", "dissolve", "greater", "water", "universal"]
+        },
+        {
+          "questions": [
+            "What is molarity?",
+            "Define molarity",
+            "What is M concentration?"
+          ],
+          "answer": "Molarity (M) is a measure of solution concentration defined as moles of solute per liter of solution. Formula: Molarity = moles of solute / liters of solution. For example, a 2 M NaCl solution contains 2 moles of NaCl per liter of solution. Molarity is temperature-dependent.",
+          "keywords": ["molarity", "M", "concentration", "mole", "liter", "mol/L"]
+        },
+        {
+          "questions": [
+            "What is a saturated solution?",
+            "Define saturated solution",
+            "What does saturated mean?"
+          ],
+          "answer": "A saturated solution is a solution that contains the maximum amount of solute that can dissolve at a given temperature and pressure. If more solute is added, it will not dissolve and will remain as solid. The solution is in equilibrium with undissolved solute.",
+          "keywords": ["saturated", "maximum", "dissolve", "equilibrium", "solution"]
+        },
+        {
+          "questions": [
+            "What is solubility?",
+            "Define solubility",
+            "What does solubility mean?"
+          ],
+          "answer": "Solubility is the maximum amount of solute that can dissolve in a given amount of solvent at a specific temperature and pressure. It is usually expressed in grams of solute per 100 mL of solvent. Solubility depends on the nature of solute and solvent, temperature, and pressure (for gases).",
+          "keywords": ["solubility", "maximum", "dissolve", "temperature", "amount"]
+        },
+        {
+          "questions": [
+            "How do you dilute a solution?",
+            "What is dilution?",
+            "Dilution formula"
+          ],
+          "answer": "Dilution is the process of reducing the concentration of a solution by adding more solvent. The dilution formula is: M1V1 = M2V2, where M1 and V1 are the initial molarity and volume, and M2 and V2 are the final molarity and volume. The amount of solute remains constant during dilution.",
+          "keywords": ["dilution", "dilute", "M1V1", "M2V2", "concentration", "solvent"]
+        }
+      ]
+    }
+  ]
+}
