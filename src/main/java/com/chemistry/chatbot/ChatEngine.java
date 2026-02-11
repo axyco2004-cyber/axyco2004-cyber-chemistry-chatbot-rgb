@@ -106,7 +106,7 @@ public class ChatEngine {
         List<Topic> topics = knowledgeBase.getAllTopics();
         StringBuilder sb = new StringBuilder();
         sb.append("\n📚 Available Chemistry Topics:\n");
-        sb.append("=" .repeat(50)).append("\n\n");
+        sb.append("=".repeat(50)).append("\n\n");
 
         for (int i = 0; i < topics.size(); i++) {
             Topic topic = topics.get(i);

@@ -8,7 +8,7 @@ Chemistry Chatbot is an educational tool that provides instant answers to chemis
 
 ### Features
 
-- 🔬 **Comprehensive Knowledge Base** - Covers 8 major chemistry topics with 50+ Q&A pairs
+- 🔬 **Comprehensive Knowledge Base** - Covers 9 major chemistry topics with 60 Q&A pairs
 - 💬 **Interactive CLI Interface** - Easy-to-use command-line interface
 - 🎯 **Smart Question Matching** - Fuzzy matching supports various ways of asking questions
 - 📚 **Topic Browsing** - Explore topics and see example questions
