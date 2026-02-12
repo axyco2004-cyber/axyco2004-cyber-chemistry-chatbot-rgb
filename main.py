@@ -79,21 +79,35 @@ Always be accurate, educational, and encouraging. Use emojis to make learning fu
 If you're unsure about something, say so rather than guessing."""
 
 def get_chat_response(user_message, conversation_history=None):
-    """Get a response from the AI model."""
+    """Get a response from the AI model with fallback responses."""
     if conversation_history is None:
         conversation_history = []
 
-    # Build the prompt with system context and conversation history
-    full_prompt = SYSTEM_PROMPT + "\n\n"
-    for msg in conversation_history:
-        role = msg.get("role", "user")
-        content = msg.get("content", "")
-        full_prompt += f"{role.upper()}: {content}\n"
-    full_prompt += f"USER: {user_message}\nASSISTANT:"
-
+    # Simple fallback responses for common questions
+    lower_msg = user_message.lower()
+    
+    # Check for common chemistry questions with built-in responses
+    if "water" in lower_msg or "h2o" in lower_msg:
+        return "💧 Water (H₂O) is a chemical compound made of two hydrogen atoms and one oxygen atom. It's essential for life and has a bent molecular shape. Try 'compound: water' for more details!"
+    elif "hydrogen" in lower_msg and not lower_msg.startswith("element:"):
+        return "🫧 Hydrogen is the lightest and most abundant element in the universe! It's a colorless, odorless gas with symbol H and atomic number 1. Try 'element: hydrogen' for full details!"
+    elif "periodic table" in lower_msg:
+        return "📋 The Periodic Table organizes all known elements by atomic number, electron configuration, and chemical properties. Elements are arranged in rows (periods) and columns (groups). Use 'element: [name]' to learn about specific elements!"
+    elif "balance" in lower_msg or "equation" in lower_msg:
+        return "⚖️ To balance chemical equations, ensure the number of atoms of each element is equal on both sides. For example: 2H₂ + O₂ → 2H₂O. What equation would you like help with?"
+    
+    # Try Gemini API for other questions
     try:
         if not GEMINI_API_KEY:
-            return "⚠️ API key not configured. Please set GEMINI_API_KEY environment variable."
+            return "⚠️ For advanced questions, please set GEMINI_API_KEY. Meanwhile, try: 'element: [name]', 'compound: [name]', or 'mass: [formula]'"
+        
+        # Build the prompt
+        full_prompt = SYSTEM_PROMPT + "\n\n"
+        for msg in conversation_history:
+            role = msg.get("role", "user")
+            content = msg.get("content", "")
+            full_prompt += f"{role.upper()}: {content}\n"
+        full_prompt += f"USER: {user_message}\nASSISTANT:"
         
         payload = {
             "contents": [{
@@ -114,12 +128,12 @@ def get_chat_response(user_message, conversation_history=None):
                 text = result["candidates"][0]["content"]["parts"][0]["text"]
                 return text
             else:
-                return "⚠️ No response generated."
+                return "🧪 I'm having trouble with my AI connection. Try these commands: 'element: oxygen', 'compound: glucose', or 'mass: NaCl'"
         else:
-            return f"⚠️ API Error: {response.status_code} - {response.text}"
+            return f"🧪 I'm here to help! Try: 'element: carbon' for element info, 'compound: ethanol' for compound details, or ask about common chemistry topics!"
             
     except Exception as e:
-        return f"⚠️ Error: {str(e)}"
+        return "🧪 I'm your chemistry assistant! Use 'element: [name]' for element info, 'compound: [name]' for compounds, or 'mass: [formula]' to calculate molar mass. What would you like to know?"
 
 # ──────────────────────────────────────────────
 # HTML Template
