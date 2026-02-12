@@ -324,7 +324,7 @@ def compound(name):
 
 if __name__ == "__main__":
     port = int(os.getenv("FLASK_PORT", 5000))
-    debug = os.getenv("FLASK_DEBUG", "1") == "1"
+    debug = os.getenv("FLASK_DEBUG", "False") == "True"
     print("🧪 Chemistry Chatbot RGB is starting...")
     print(f"🌐 Open http://localhost:{port} in your browser")
     app.run(host="0.0.0.0", port=port, debug=debug)
