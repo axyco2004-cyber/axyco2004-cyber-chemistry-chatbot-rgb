@@ -1,24 +1,27 @@
 """
 AI Assistant Module
-Integrates OpenAI for comprehensive chemistry and materials science answers.
+Integrates Google Gemini for comprehensive chemistry and materials science answers.
 """
 
 import os
-from openai import OpenAI
+import google.generativeai as genai
 from knowledge_base import textbook_kb
 
 
 class AIAssistant:
-    """AI-powered assistant with textbook and chemistry knowledge."""
+    """AI-powered assistant with textbook and chemistry knowledge using Google Gemini."""
     
     def __init__(self):
-        self.api_key = os.getenv("OPENAI_API_KEY")
-        self.client = OpenAI(api_key=self.api_key) if self.api_key else None
-        self.model = "gpt-4o-mini"  # Fast and cost-effective
+        self.api_key = os.getenv("GEMINI_API_KEY")
+        if self.api_key:
+            genai.configure(api_key=self.api_key)
+            self.model = genai.GenerativeModel('gemini-1.5-flash')  # Fast and free!
+        else:
+            self.model = None
         
     def is_available(self) -> bool:
         """Check if AI assistant is available."""
-        return self.client is not None
+        return self.model is not None
     
     def get_relevant_context(self, query: str) -> str:
         """Get relevant context from textbook and chemistry knowledge."""
@@ -27,7 +30,7 @@ class AIAssistant:
         # Search textbook for relevant information
         textbook_result = textbook_kb.smart_search(query)
         if textbook_result:
-            context_parts.append(f"=== Materials Science Textbook ===\n{textbook_result[:1500]}")
+            context_parts.append(f"=== Materials Science Textbook ===\n{textbook_result[:2000]}")
         
         # Add chemistry context hints based on keywords
         query_lower = query.lower()
@@ -72,38 +75,27 @@ You have access to:
 3. Advanced calculators for stoichiometry, solutions, pH, gas laws, etc.
 
 Your role:
-- Provide clear, accurate, and complete answers to chemistry and materials science questions
+- Provide clear, accurate, and COMPLETE answers to chemistry and materials science questions
 - Use the textbook context when available to give detailed explanations
 - Explain concepts in an educational and encouraging way
 - When appropriate, suggest using the chatbot's built-in tools (element:, compound:, mass:, calc:)
 - Use emojis to make learning engaging
 - If calculations are needed, show the setup and guide users to use the calc: commands
+- Keep responses concise but complete (3-5 sentences for simple questions, more for complex ones)
 
-Always be accurate and cite when information comes from the textbook."""
+Always be accurate and educational."""
 
             # Add context if available
             if context:
                 system_prompt += f"\n\n=== AVAILABLE CONTEXT ===\n{context}"
             
-            # Build messages
-            messages = [{"role": "system", "content": system_prompt}]
-            
-            # Add conversation history if provided
-            if conversation_history:
-                messages.extend(conversation_history[-6:])  # Last 3 exchanges
-            
-            # Add current user message
-            messages.append({"role": "user", "content": user_message})
+            # Build full prompt
+            full_prompt = f"{system_prompt}\n\n=== User Question ===\n{user_message}\n\nProvide a complete, helpful answer:"
             
             # Generate response
-            response = self.client.chat.completions.create(
-                model=self.model,
-                messages=messages,
-                temperature=0.7,
-                max_tokens=800
-            )
+            response = self.model.generate_content(full_prompt)
             
-            return response.choices[0].message.content
+            return response.text
             
         except Exception as e:
             print(f"AI Error: {e}")
@@ -123,14 +115,9 @@ Result: {result}
 
 Provide a brief, friendly explanation of what this result means."""
 
-            response = self.client.chat.completions.create(
-                model=self.model,
-                messages=[{"role": "user", "content": prompt}],
-                temperature=0.7,
-                max_tokens=200
-            )
+            response = self.model.generate_content(prompt)
             
-            return response.choices[0].message.content
+            return response.text
             
         except Exception as e:
             print(f"AI Explanation Error: {e}")

@@ -1,12 +1,13 @@
 # 🧪 Chemistry Chatbot RGB
 
-✨ **NEW: AI-Powered Responses!** ✨
+✨ **NEW: AI-Powered Responses with Google Gemini!** ✨
 
-A comprehensive **AI-powered** chemistry chatbot with **built-in calculation solvers** and **Materials Science knowledge** (Callister's 8th Edition textbook). Uses GPT-4 to provide complete, detailed answers. Perfect for students, educators, and chemistry enthusiasts!
+A comprehensive **AI-powered** chemistry chatbot with **built-in calculation solvers** and **Materials Science knowledge** (Callister's 8th Edition textbook). Uses **Google Gemini 1.5 Flash** (FREE!) to provide complete, detailed answers. Perfect for students, educators, and chemistry enthusiasts!
 
 ## 📖 About
-### 🤖 AI-Powered Intelligence
-- **Complete answers** using GPT-4o-mini for speed and accuracy
+### 🤖 AI-Powered Intelligence (Google Gemini)
+- 🎉 **FREE API** - Google Gemini 1.5 Flash with generous free tier!
+- **Complete answers** with fast response times
 - **Context-aware** - searches textbook and chemistry databases
 - **Educational explanations** for calculations
 - Automatic fallback to pattern-based responses if API unavailable
@@ -66,16 +67,16 @@ Chemistry Chatbot RGB is an intelligent assistant that can:
    pip install -r requirements.txt
    ```
 
-3. **Set up OpenAI API (for AI responses):**
+3. **Set up Google Gemini API (for AI responses - FREE!):**
    ```bash
    # Copy the example env file
    copy .env.example .env
    
-   # Edit .env and add your OpenAI API key:
-   # OPENAI_API_KEY=sk-your-key-here
+   # Edit .env and add your Gemini API key:
+   # GEMINI_API_KEY=your-key-here
    ```
    
-   ⚠️ **Get your API key from:** https://platform.openai.com/api-keys
+   🎉 **Get your FREE API key from:** https://makersuite.google.com/app/apikey
    
    📌 **Note:** The chatbot works without an API key (using pattern-based responses), but AI-powered complete answers require one.
 
@@ -163,7 +164,8 @@ This project is configured for serverless deployment on Vercel.
 
 3. **Add Environment Variable (Important!):**
    - Go to Project Settings → Environment Variables
-   - Add: `OPENAI_API_KEY` = `your-api-key-here`
+   - Add: `GEMINI_API_KEY` = `your-api-key-here`
+   - Get FREE key: https://makersuite.google.com/app/apikey
    - Redeploy for changes to take effect
 
 4. **Access your live app!** 🎉
@@ -171,20 +173,13 @@ This project is configured for serverless deployment on Vercel.
 
 ### 💡 Benefits:
 - ✅ Auto-deploys on every GitHub push
-- ✅ AI-powered complete answers (with API key)
-- ✅ Free tier available
+- ✅ AI-powered complete answers (with FREE Gemini API key)
+- ✅ Vercel free tier available
 - ✅ Global CDN for fast access
 
-This project is configured for Vercel deployment with Python runtime.
+---
 
-1. Push your changes to GitHub
-2. In Vercel, import the repository
-3. **Add Environment Variable:**
-   - Key: `OPENAI_API_KEY`
-   - Value: Your OpenAI API key
-4. Deploy!
-
-The chatbot will auto-detect environment variables and enable AI features when the API key is present.
+**Important:** Add the environment variable `GEMINI_API_KEY` in Vercel's Project Settings → Environment Variables with your free Google Gemini API key from: https://makersuite.google.com/app/apikey
 
 ## 🤝 Contributing
 
