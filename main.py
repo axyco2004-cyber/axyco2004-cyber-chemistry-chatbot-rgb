@@ -14,7 +14,7 @@ app.secret_key = os.getenv("SECRET_KEY", "default-secret-key")
 
 # Initialize Gemini client
 genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
-model = genai.GenerativeModel('gemini-1.5-flash')
+model = genai.GenerativeModel('models/gemini-pro')
 
 # ──────────────────────────────────────────────
 # Chemistry Helper Functions
