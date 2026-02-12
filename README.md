@@ -1,6 +1,6 @@
 # 🧪 Chemistry Chatbot RGB
 
-A chemistry chatbot designed to help users explore and learn about chemistry concepts interactively.
+A chemistry chatbot designed to help users explore and learn about chemistry concepts interactively. Now enhanced with **Materials Science & Engineering** knowledge from Callister's 8th Edition textbook!
 
 ## 📖 About
 
@@ -10,6 +10,13 @@ Chemistry Chatbot RGB is an intelligent chatbot that can assist with:
 - ⚗️ Explaining chemical reactions and equations
 - 🧬 Providing information on elements and compounds
 - 📊 Helping with chemistry problem-solving
+- 📚 **NEW: Materials Science topics** including:
+  - Material properties and structures (FCC, BCC, HCP crystals)
+  - Mechanical properties (stress, strain, elasticity)
+  - Phase diagrams and transformations
+  - Metallurgy and alloys (steel, aluminum, etc.)
+  - Ceramics, polymers, and composites
+  - Thermal, electrical, and magnetic properties
 
 ## 🚀 Getting Started
 
@@ -35,6 +42,27 @@ Chemistry Chatbot RGB is an intelligent chatbot that can assist with:
    ```bash
    python main.py
    ```
+
+## 💬 Usage
+
+The chatbot supports several commands and natural language queries:
+
+### Chemistry Commands:
+- `element: [name]` - Get detailed element information (e.g., "element: sodium")
+- `compound: [name]` - Get compound details from PubChem (e.g., "compound: ethanol")
+- `mass: [formula]` - Calculate molar mass (e.g., "mass: H2O")
+
+### Materials Science Commands:
+- `textbook: [query]` - Search the Materials Science textbook (e.g., "textbook: crystal structures")
+- `material: [query]` - Look up specific material properties (e.g., "material: steel properties")
+
+### Natural Language:
+Just ask questions naturally! The bot will automatically search chemistry databases or the textbook:
+- "What is hydrogen?"
+- "Tell me about steel"
+- "Explain phase diagrams"
+- "Balance: Fe + O2 -> Fe2O3"
+- "What are crystal structures?"
 
 ## ☁️ Deploy to Vercel
 

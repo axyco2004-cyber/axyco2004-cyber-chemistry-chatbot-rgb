@@ -4,6 +4,7 @@ from dotenv import load_dotenv
 import periodictable
 import pubchempy as pcp
 import numpy as np
+from knowledge_base import textbook_kb
 
 # Load environment variables
 load_dotenv()
@@ -68,6 +69,15 @@ You help users with:
 - Helping with chemistry problem-solving
 - Balancing chemical equations
 - Explaining molecular structures
+- Materials science and engineering topics (with access to Callister's Materials Science textbook)
+
+You have access to a comprehensive Materials Science and Engineering textbook that covers:
+- Material properties and structures
+- Mechanical properties of materials
+- Phase diagrams and transformations
+- Metallurgy and ceramics
+- Polymers and composites
+- Electronic, thermal, and magnetic properties
 
 Always be accurate, educational, and encouraging. Use emojis to make learning fun!
 If you're unsure about something, say so rather than guessing."""
@@ -78,6 +88,21 @@ def get_chat_response(user_message, conversation_history=None):
         conversation_history = []
 
     lower_msg = user_message.lower()
+    
+    # Materials Science topics - check textbook first
+    materials_keywords = ['material', 'steel', 'alloy', 'crystal structure', 'fcc', 'bcc', 
+                          'hcp', 'ceramic', 'polymer', 'composite', 'stress', 'strain',
+                          'modulus', 'elasticity', 'plasticity', 'hardness', 'tensile',
+                          'phase diagram', 'microstructure', 'grain', 'dislocation',
+                          'annealing', 'quenching', 'tempering', 'diffusion', 'corrosion',
+                          'fracture', 'fatigue', 'creep', 'iron-carbon', 'aluminum oxide',
+                          'silicon carbide', 'thermal properties', 'electrical properties']
+    
+    # Check if query is about materials science
+    if any(keyword in lower_msg for keyword in materials_keywords):
+        textbook_result = textbook_kb.smart_search(user_message)
+        if textbook_result:
+            return f"📚 <b>From Materials Science & Engineering Textbook:</b><br><br>{textbook_result[:800]}..."
     
     # Water/H2O questions
     if "water" in lower_msg or "h2o" in lower_msg or "h₂o" in lower_msg:
@@ -120,11 +145,16 @@ def get_chat_response(user_message, conversation_history=None):
     
     # General chemistry question
     elif "chemistry" in lower_msg or "help" in lower_msg or "what can you" in lower_msg:
-        return "🧪 <b>I'm your Chemistry Assistant!</b> I can help with:<br>• Element info: 'element: sodium'<br>• Compound details: 'compound: ethanol'<br>• Molar mass: 'mass: NaCl'<br>• Balancing equations<br>• Periodic table info<br>• Chemical reactions<br>• pH and acids/bases<br><br>Ask me anything about chemistry!"
+        return "🧪 <b>I'm your Chemistry & Materials Science Assistant!</b> I can help with:<br>• Element info: 'element: sodium'<br>• Compound details: 'compound: ethanol'<br>• Molar mass: 'mass: NaCl'<br>• Balancing equations<br>• Periodic table info<br>• Chemical reactions<br>• pH and acids/bases<br>• <b>Materials Science topics</b> (from Callister's textbook)<br>• Material properties, structures, phase diagrams, and more!<br><br>Ask me anything about chemistry or materials!"
     
     # Default helpful response
     else:
-        return f"🧪 Interesting question about '{user_message}'! Try these commands:<br>• <b>element:</b> [name] - Get element info<br>• <b>compound:</b> [name] - Get compound details<br>• <b>mass:</b> [formula] - Calculate molar mass<br><br>Or ask about: water, hydrogen, periodic table, balancing equations, pH, or molecules!"
+        # Try searching the textbook as a fallback
+        textbook_result = textbook_kb.smart_search(user_message)
+        if textbook_result:
+            return f"📚 <b>From Materials Science Textbook:</b><br><br>{textbook_result[:700]}..."
+        
+        return f"🧪 Interesting question about '{user_message}'! Try these commands:<br>• <b>element:</b> [name] - Get element info<br>• <b>compound:</b> [name] - Get compound details<br>• <b>mass:</b> [formula] - Calculate molar mass<br><br>Or ask about: water, hydrogen, periodic table, balancing equations, pH, molecules, or <b>materials science topics</b>!"
 
 # ──────────────────────────────────────────────
 # HTML Template
@@ -221,6 +251,7 @@ HTML_TEMPLATE = """
                 <br>⚗️ Chemical reactions
                 <br>🧬 Element & compound info
                 <br>📊 Problem solving
+                <br>📚 <b>Materials Science</b> (powered by Callister's textbook)
                 <br><br>Try asking me something!
             </div>
         </div>
@@ -229,6 +260,8 @@ HTML_TEMPLATE = """
             <button class="quick-btn" onclick="sendQuick('What is H2O?')">💧 Water</button>
             <button class="quick-btn" onclick="sendQuick('Balance: Fe + O2 -> Fe2O3')">⚖️ Balance</button>
             <button class="quick-btn" onclick="sendQuick('Explain the periodic table')">📋 Periodic Table</button>
+            <button class="quick-btn" onclick="sendQuick('What is steel?')">🔩 Steel</button>
+            <button class="quick-btn" onclick="sendQuick('Tell me about crystal structures')">💎 Crystals</button>
         </div>
         <div class="chat-input">
             <input type="text" id="userInput" placeholder="Ask me a chemistry question..."
@@ -325,6 +358,16 @@ def chat():
         if isinstance(result, float):
             response = f"⚖️ Molar mass of <b>{formula}</b>: {result} g/mol"
         else:
+            response = get_chat_response(user_message)
+
+    elif lower_msg.startswith("textbook:") or lower_msg.startswith("material:"):
+        # Extract the query after the command
+        query = user_message.split(":", 1)[1].strip()
+        textbook_result = textbook_kb.smart_search(query)
+        if textbook_result:
+            response = f"📚 <b>From Materials Science & Engineering Textbook:</b><br><br>{textbook_result[:800]}..."
+        else:
+            response = f"🔍 No results found in textbook for '{query}'. Try different keywords or ask a general question!"
             response = get_chat_response(user_message)
 
     else:
