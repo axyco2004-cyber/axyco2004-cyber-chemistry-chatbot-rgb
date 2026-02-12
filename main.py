@@ -5,6 +5,7 @@ import periodictable
 import pubchempy as pcp
 import numpy as np
 from knowledge_base import textbook_kb
+from chemistry_calculator import calculator
 
 # Load environment variables
 load_dotenv()
@@ -145,7 +146,28 @@ def get_chat_response(user_message, conversation_history=None):
     
     # General chemistry question
     elif "chemistry" in lower_msg or "help" in lower_msg or "what can you" in lower_msg:
-        return "🧪 <b>I'm your Chemistry & Materials Science Assistant!</b> I can help with:<br>• Element info: 'element: sodium'<br>• Compound details: 'compound: ethanol'<br>• Molar mass: 'mass: NaCl'<br>• Balancing equations<br>• Periodic table info<br>• Chemical reactions<br>• pH and acids/bases<br>• <b>Materials Science topics</b> (from Callister's textbook)<br>• Material properties, structures, phase diagrams, and more!<br><br>Ask me anything about chemistry or materials!"
+        return "🧪 <b>I'm your Chemistry & Materials Science Assistant!</b> I can help with:<br><br><b>Info Lookups:</b><br>• Element info: 'element: sodium'<br>• Compound details: 'compound: ethanol'<br>• Molar mass: 'mass: NaCl'<br><br><b>Calculations (calc: type | params):</b><br>• Stoichiometry: moles_to_grams, grams_to_moles<br>• Solutions: molarity, dilution<br>• pH: ph, poh, ph_value<br>• Gas Laws: ideal_gas, combined_gas<br>• Composition: percent, limiting_reactant<br><br><b>Knowledge:</b><br>• Balancing equations, reactions, pH<br>• <b>Materials Science</b> textbook search<br><br>Ask anything or try 'calc examples' for calculation help!"
+    
+    # Calculation examples
+    elif "calc" in lower_msg and ("example" in lower_msg or "help" in lower_msg):
+        return """🧮 <b>Calculator Examples:</b><br><br>
+<b>Stoichiometry:</b><br>
+• calc: moles_to_grams | formula=H2O | moles=2<br>
+• calc: grams_to_moles | formula=NaCl | grams=10<br>
+• calc: moles_to_molecules | moles=0.5<br><br>
+<b>Solutions:</b><br>
+• calc: molarity | moles=0.5 | volume=2<br>
+• calc: dilution | M1=2 | V1=10 | V2=50<br><br>
+<b>pH:</b><br>
+• calc: ph | H=0.001<br>
+• calc: ph_value | pH=3.5<br><br>
+<b>Gas Laws:</b><br>
+• calc: ideal_gas | P=1 | V=22.4 | T=273<br>
+• calc: combined_gas | P1=1 | V1=10 | T1=300 | V2=20 | T2=350<br><br>
+<b>Other:</b><br>
+• calc: percent | formula=H2O<br>
+• calc: limiting | r1=Fe | g1=10 | c1=4 | r2=O2 | g2=5 | c2=3
+        """
     
     # Default helpful response
     else:
@@ -154,7 +176,7 @@ def get_chat_response(user_message, conversation_history=None):
         if textbook_result:
             return f"📚 <b>From Materials Science Textbook:</b><br><br>{textbook_result[:700]}..."
         
-        return f"🧪 Interesting question about '{user_message}'! Try these commands:<br>• <b>element:</b> [name] - Get element info<br>• <b>compound:</b> [name] - Get compound details<br>• <b>mass:</b> [formula] - Calculate molar mass<br><br>Or ask about: water, hydrogen, periodic table, balancing equations, pH, molecules, or <b>materials science topics</b>!"
+        return f"🧪 Interesting question about '{user_message}'! Try these commands:<br>• <b>element:</b> [name]<br>• <b>compound:</b> [name]<br>• <b>mass:</b> [formula]<br>• <b>calc:</b> [type] | [params] (try 'calc examples')<br><br>Or ask about: water, hydrogen, equations, pH, materials science, or calculations!"
 
 # ──────────────────────────────────────────────
 # HTML Template
@@ -250,18 +272,18 @@ HTML_TEMPLATE = """
                 <br>🔬 Chemistry questions
                 <br>⚗️ Chemical reactions
                 <br>🧬 Element & compound info
-                <br>📊 Problem solving
-                <br>📚 <b>Materials Science</b> (powered by Callister's textbook)
-                <br><br>Try asking me something!
+                <br>🧮 <b>NEW: Chemistry Calculations!</b>
+                <br>📚 Materials Science (Callister's textbook)
+                <br><br>Try 'help' or 'calc examples' to see what I can do!
             </div>
         </div>
         <div class="quick-actions">
-            <button class="quick-btn" onclick="sendQuick('Tell me about hydrogen')">🫧 Hydrogen</button>
-            <button class="quick-btn" onclick="sendQuick('What is H2O?')">💧 Water</button>
-            <button class="quick-btn" onclick="sendQuick('Balance: Fe + O2 -> Fe2O3')">⚖️ Balance</button>
-            <button class="quick-btn" onclick="sendQuick('Explain the periodic table')">📋 Periodic Table</button>
-            <button class="quick-btn" onclick="sendQuick('What is steel?')">🔩 Steel</button>
-            <button class="quick-btn" onclick="sendQuick('Tell me about crystal structures')">💎 Crystals</button>
+            <button class="quick-btn" onclick="sendQuick('help')">❓ Help</button>
+            <button class="quick-btn" onclick="sendQuick('calc examples')">🧮 Calculators</button>
+            <button class="quick-btn" onclick="sendQuick('element: hydrogen')">🫧 Elements</button>
+            <button class="quick-btn" onclick="sendQuick('What is pH?')">🧪 pH</button>
+            <button class="quick-btn" onclick="sendQuick('What is steel?')">🔩 Materials</button>
+            <button class="quick-btn" onclick="sendQuick('calc: moles_to_grams | formula=H2O | moles=2')">⚗️ Calculate</button>
         </div>
         <div class="chat-input">
             <input type="text" id="userInput" placeholder="Ask me a chemistry question..."
@@ -368,12 +390,105 @@ def chat():
             response = f"📚 <b>From Materials Science & Engineering Textbook:</b><br><br>{textbook_result[:800]}..."
         else:
             response = f"🔍 No results found in textbook for '{query}'. Try different keywords or ask a general question!"
-            response = get_chat_response(user_message)
+
+    # ==================== CALCULATION COMMANDS ====================
+    
+    elif lower_msg.startswith("calc:"):
+        # Parse calculation commands: calc: type | param1=value | param2=value
+        try:
+            parts = user_message[5:].strip().split("|")
+            calc_type = parts[0].strip().lower()
+            params = {}
+            
+            for part in parts[1:]:
+                if "=" in part:
+                    key, value = part.split("=", 1)
+                    key = key.strip()
+                    value = value.strip()
+                    try:
+                        params[key] = float(value)
+                    except:
+                        params[key] = value
+            
+            # Route to appropriate calculator
+            if calc_type in ["moles_to_grams", "moles to grams", "mol to g"]:
+                result = calculator.moles_to_grams(params.get("formula"), params.get("moles"))
+            elif calc_type in ["grams_to_moles", "grams to moles", "g to mol"]:
+                result = calculator.grams_to_moles(params.get("formula"), params.get("grams"))
+            elif calc_type in ["moles_to_molecules", "mol to molecules"]:
+                result = calculator.moles_to_molecules(params.get("moles"))
+            elif calc_type in ["molecules_to_moles", "molecules to mol"]:
+                result = calculator.molecules_to_moles(params.get("molecules"))
+            elif calc_type in ["molarity", "concentration"]:
+                result = calculator.calculate_molarity(
+                    moles=params.get("moles"),
+                    grams=params.get("grams"),
+                    formula=params.get("formula"),
+                    volume_L=params.get("volume")
+                )
+            elif calc_type in ["dilution", "m1v1=m2v2"]:
+                result = calculator.dilution(
+                    M1=params.get("M1"),
+                    V1=params.get("V1"),
+                    M2=params.get("M2"),
+                    V2=params.get("V2")
+                )
+            elif calc_type in ["ph", "ph_from_h"]:
+                result = calculator.calculate_pH(params.get("H"))
+            elif calc_type in ["poh", "ph_from_oh"]:
+                result = calculator.calculate_pOH(params.get("OH"))
+            elif calc_type in ["ph_value", "ph info"]:
+                result = calculator.pH_from_value(params.get("pH"))
+            elif calc_type in ["ideal_gas", "pv=nrt", "gas law"]:
+                result = calculator.ideal_gas_law(
+                    P=params.get("P"),
+                    V=params.get("V"),
+                    n=params.get("n"),
+                    T=params.get("T")
+                )
+            elif calc_type in ["combined_gas", "gas laws"]:
+                result = calculator.combined_gas_law(
+                    P1=params.get("P1"),
+                    V1=params.get("V1"),
+                    T1=params.get("T1"),
+                    P2=params.get("P2"),
+                    V2=params.get("V2"),
+                    T2=params.get("T2")
+                )
+            elif calc_type in ["percent", "percent_composition", "composition"]:
+                result = calculator.percent_composition(params.get("formula"))
+            elif calc_type in ["limiting", "limiting_reactant", "limiting reagent"]:
+                result = calculator.limiting_reactant(
+                    reactant1_formula=params.get("r1"),
+                    reactant1_grams=params.get("g1"),
+                    reactant1_coef=int(params.get("c1", 1)),
+                    reactant2_formula=params.get("r2"),
+                    reactant2_grams=params.get("g2"),
+                    reactant2_coef=int(params.get("c2", 1))
+                )
+            else:
+                result = {"error": f"Unknown calculation type '{calc_type}'"}
+            
+            # Format response
+            if "error" in result:
+                response = f"❌ <b>Calculation Error:</b> {result['error']}"
+            else:
+                response = f"🧮 <b>Calculation Result:</b><br><pre>{format_calc_result(result)}</pre>"
+        
+        except Exception as e:
+            response = f"❌ <b>Calculation Error:</b> {str(e)}<br><br>📝 <b>Format:</b> calc: type | param1=value | param2=value<br>Example: calc: moles_to_grams | formula=H2O | moles=2"
 
     else:
         response = get_chat_response(user_message)
 
     return jsonify({"response": response})
+
+def format_calc_result(result: dict) -> str:
+    """Format calculation results for display."""
+    formatted = ""
+    for key, value in result.items():
+        formatted += f"{key}: {value}\n"
+    return formatted
 
 @app.route("/element/<symbol>", methods=["GET"])
 def element(symbol):

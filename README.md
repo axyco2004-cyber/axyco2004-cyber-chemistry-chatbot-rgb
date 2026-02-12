@@ -1,22 +1,27 @@
 # 🧪 Chemistry Chatbot RGB
 
-A chemistry chatbot designed to help users explore and learn about chemistry concepts interactively. Now enhanced with **Materials Science & Engineering** knowledge from Callister's 8th Edition textbook!
+A comprehensive chemistry chatbot with **built-in calculation solvers** and **Materials Science knowledge** (Callister's 8th Edition textbook). Perfect for students, educators, and chemistry enthusiasts!
 
 ## 📖 About
 
-Chemistry Chatbot RGB is an intelligent chatbot that can assist with:
+Chemistry Chatbot RGB is an intelligent assistant that can:
 
-- 🔬 Answering chemistry-related questions
-- ⚗️ Explaining chemical reactions and equations
-- 🧬 Providing information on elements and compounds
-- 📊 Helping with chemistry problem-solving
-- 📚 **NEW: Materials Science topics** including:
+- 🔬 Answer chemistry questions
+- ⚗️ Explain chemical reactions and equations
+- 🧬 Provide element and compound information
+- 🧮 **NEW: Solve chemistry calculation problems!**
+  - Stoichiometry (moles ↔ grams ↔ molecules)
+  - Solution chemistry (molarity, dilution)
+  - pH calculations
+  - Gas laws (PV=nRT, combined gas law)
+  - Percent composition
+  - Limiting reactant problems
+- 📚 Materials Science topics including:
   - Material properties and structures (FCC, BCC, HCP crystals)
   - Mechanical properties (stress, strain, elasticity)
   - Phase diagrams and transformations
   - Metallurgy and alloys (steel, aluminum, etc.)
   - Ceramics, polymers, and composites
-  - Thermal, electrical, and magnetic properties
 
 ## 🚀 Getting Started
 
@@ -45,7 +50,7 @@ Chemistry Chatbot RGB is an intelligent chatbot that can assist with:
 
 ## 💬 Usage
 
-The chatbot supports several commands and natural language queries:
+The chatbot supports various commands and natural language queries:
 
 ### Chemistry Commands:
 - `element: [name]` - Get detailed element information (e.g., "element: sodium")
@@ -56,6 +61,42 @@ The chatbot supports several commands and natural language queries:
 - `textbook: [query]` - Search the Materials Science textbook (e.g., "textbook: crystal structures")
 - `material: [query]` - Look up specific material properties (e.g., "material: steel properties")
 
+### 🧮 Calculator Commands:
+
+**Stoichiometry:**
+```
+calc: moles_to_grams | formula=H2O | moles=2
+calc: grams_to_moles | formula=NaCl | grams=10
+calc: moles_to_molecules | moles=0.5
+calc: molecules_to_moles | molecules=3.01e23
+```
+
+**Solution Chemistry:**
+```
+calc: molarity | moles=0.5 | volume=2
+calc: molarity | grams=10 | formula=NaCl | volume=1
+calc: dilution | M1=2 | V1=10 | V2=50
+```
+
+**pH Calculations:**
+```
+calc: ph | H=0.001
+calc: poh | OH=1e-5
+calc: ph_value | pH=3.5
+```
+
+**Gas Laws:**
+```
+calc: ideal_gas | P=1 | V=22.4 | T=273
+calc: combined_gas | P1=1 | V1=10 | T1=300 | V2=20 | T2=350
+```
+
+**Composition & Limiting Reactants:**
+```
+calc: percent | formula=H2O
+calc: limiting | r1=Fe | g1=10 | c1=4 | r2=O2 | g2=5 | c2=3
+```
+
 ### Natural Language:
 Just ask questions naturally! The bot will automatically search chemistry databases or the textbook:
 - "What is hydrogen?"
@@ -63,6 +104,8 @@ Just ask questions naturally! The bot will automatically search chemistry databa
 - "Explain phase diagrams"
 - "Balance: Fe + O2 -> Fe2O3"
 - "What are crystal structures?"
+- "help" - See all features
+- "calc examples" - View calculator examples
 
 ## ☁️ Deploy to Vercel
 
