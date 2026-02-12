@@ -1,9 +1,17 @@
 # 🧪 Chemistry Chatbot RGB
 
-A comprehensive chemistry chatbot with **built-in calculation solvers** and **Materials Science knowledge** (Callister's 8th Edition textbook). Perfect for students, educators, and chemistry enthusiasts!
+✨ **NEW: AI-Powered Responses!** ✨
+
+A comprehensive **AI-powered** chemistry chatbot with **built-in calculation solvers** and **Materials Science knowledge** (Callister's 8th Edition textbook). Uses GPT-4 to provide complete, detailed answers. Perfect for students, educators, and chemistry enthusiasts!
 
 ## 📖 About
+### 🤖 AI-Powered Intelligence
+- **Complete answers** using GPT-4o-mini for speed and accuracy
+- **Context-aware** - searches textbook and chemistry databases
+- **Educational explanations** for calculations
+- Automatic fallback to pattern-based responses if API unavailable
 
+### ✨ Core Features
 Chemistry Chatbot RGB is an intelligent assistant that can:
 
 - 🔬 Answer chemistry questions
@@ -22,6 +30,21 @@ Chemistry Chatbot RGB is an intelligent assistant that can:
   - Phase diagrams and transformations
   - Metallurgy and alloys (steel, aluminum, etc.)
   - Ceramics, polymers, and composites
+
+### 🧮 Advanced Calculators
+- **Stoichiometry**: moles ↔ grams ↔ molecules
+- **Solution Chemistry**: molarity, dilution (M₁V₁ = M₂V₂)
+- **pH Calculations**: from H⁺ or OH⁻ concentrations
+- **Gas Laws**: PV=nRT, combined gas law
+- **Percent Composition**: elemental analysis
+- **Limiting Reactants**: find limiting reagent
+
+### 💎 Materials Science
+- Crystal structures (FCC, BCC, HCP)
+- Mechanical properties (stress, strain, elasticity)
+- Phase diagrams and transformations
+- Metallurgy and alloys
+- Ceramics, polymers, composites
 
 ## 🚀 Getting Started
 
@@ -43,10 +66,25 @@ Chemistry Chatbot RGB is an intelligent assistant that can:
    pip install -r requirements.txt
    ```
 
-3. Run the chatbot:
+3. **Set up OpenAI API (for AI responses):**
+   ```bash
+   # Copy the example env file
+   copy .env.example .env
+   
+   # Edit .env and add your OpenAI API key:
+   # OPENAI_API_KEY=sk-your-key-here
+   ```
+   
+   ⚠️ **Get your API key from:** https://platform.openai.com/api-keys
+   
+   📌 **Note:** The chatbot works without an API key (using pattern-based responses), but AI-powered complete answers require one.
+
+4. Run the chatbot:
    ```bash
    python main.py
    ```
+
+5. Open http://localhost:5000 in your browser
 
 ## 💬 Usage
 
@@ -109,13 +147,44 @@ Just ask questions naturally! The bot will automatically search chemistry databa
 
 ## ☁️ Deploy to Vercel
 
-This project is configured for Vercel using the Python runtime. The entrypoint is
-`api/index.py`, which exposes the Flask `app`.
+This project is configured for serverless deployment on Vercel.
 
-1. Push your changes to GitHub.
-2. In Vercel, import the repository and deploy.
-3. No API keys required - the chatbot has built-in chemistry knowledge!
-4. Deploy and open the assigned Vercel URL.
+### Quick Deploy:
+
+1. **Push to GitHub** (already done! ✅)
+   ```bash
+   git push origin main
+   ```
+
+2. **Import to Vercel:**
+   - Go to https://vercel.com/new
+   - Import `axyco2004-cyber-chemistry-chatbot-rgb` from GitHub
+   - Click Deploy
+
+3. **Add Environment Variable (Important!):**
+   - Go to Project Settings → Environment Variables
+   - Add: `OPENAI_API_KEY` = `your-api-key-here`
+   - Redeploy for changes to take effect
+
+4. **Access your live app!** 🎉
+   - URL: `https://your-project.vercel.app`
+
+### 💡 Benefits:
+- ✅ Auto-deploys on every GitHub push
+- ✅ AI-powered complete answers (with API key)
+- ✅ Free tier available
+- ✅ Global CDN for fast access
+
+This project is configured for Vercel deployment with Python runtime.
+
+1. Push your changes to GitHub
+2. In Vercel, import the repository
+3. **Add Environment Variable:**
+   - Key: `OPENAI_API_KEY`
+   - Value: Your OpenAI API key
+4. Deploy!
+
+The chatbot will auto-detect environment variables and enable AI features when the API key is present.
 
 ## 🤝 Contributing
 

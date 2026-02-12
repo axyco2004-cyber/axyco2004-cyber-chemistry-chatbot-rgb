@@ -6,6 +6,7 @@ import pubchempy as pcp
 import numpy as np
 from knowledge_base import textbook_kb
 from chemistry_calculator import calculator
+from ai_assistant import ai_assistant
 
 # Load environment variables
 load_dotenv()
@@ -84,11 +85,19 @@ Always be accurate, educational, and encouraging. Use emojis to make learning fu
 If you're unsure about something, say so rather than guessing."""
 
 def get_chat_response(user_message, conversation_history=None):
-    """Get a response from the chatbot with built-in chemistry knowledge."""
+    """Get a response from the chatbot with AI or built-in knowledge."""
     if conversation_history is None:
         conversation_history = []
 
     lower_msg = user_message.lower()
+    
+    # Try AI assistant first for comprehensive answers
+    if ai_assistant.is_available():
+        ai_response = ai_assistant.generate_response(user_message, conversation_history)
+        if ai_response:
+            return ai_response
+    
+    # Fall back to pattern-based responses if AI unavailable
     
     # Materials Science topics - check textbook first
     materials_keywords = ['material', 'steel', 'alloy', 'crystal structure', 'fcc', 'bcc', 
@@ -473,7 +482,13 @@ def chat():
             if "error" in result:
                 response = f"❌ <b>Calculation Error:</b> {result['error']}"
             else:
+                # Get AI explanation if available
+                ai_explanation = ai_assistant.generate_calculation_explanation(calc_type, result)
+                
                 response = f"🧮 <b>Calculation Result:</b><br><pre>{format_calc_result(result)}</pre>"
+                
+                if ai_explanation:
+                    response += f"<br><br>💡 {ai_explanation}"
         
         except Exception as e:
             response = f"❌ <b>Calculation Error:</b> {str(e)}<br><br>📝 <b>Format:</b> calc: type | param1=value | param2=value<br>Example: calc: moles_to_grams | formula=H2O | moles=2"
