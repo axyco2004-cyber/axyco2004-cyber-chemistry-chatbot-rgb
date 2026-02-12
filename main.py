@@ -1,4 +1,4 @@
-﻿import os
+import os
 from flask import Flask, request, jsonify, render_template_string
 from openai import OpenAI
 from dotenv import load_dotenv
@@ -15,9 +15,9 @@ app.secret_key = os.getenv("SECRET_KEY", "default-secret-key")
 # Initialize OpenAI client
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
-# ÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇ
+# ──────────────────────────────────────────────
 # Chemistry Helper Functions
-# ÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇ
+# ──────────────────────────────────────────────
 
 def get_element_info(symbol_or_name):
     """Retrieve information about a chemical element."""
@@ -60,11 +60,11 @@ def calculate_molar_mass(formula):
     except Exception as e:
         return {"error": str(e)}
 
-# ÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇ
+# ──────────────────────────────────────────────
 # Chat Function
-# ÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇ
+# ──────────────────────────────────────────────
 
-SYSTEM_PROMPT = """You are Chemistry Chatbot RGB ­ƒº¬, a friendly and knowledgeable chemistry assistant.
+SYSTEM_PROMPT = """You are Chemistry Chatbot RGB 🧪, a friendly and knowledgeable chemistry assistant.
 You help users with:
 - Answering chemistry-related questions
 - Explaining chemical reactions and equations
@@ -94,11 +94,11 @@ def get_chat_response(user_message, conversation_history=None):
         )
         return response.choices[0].message.content
     except Exception as e:
-        return f"ÔÜá´©Å Error: {str(e)}"
+        return f"⚠️ Error: {str(e)}"
 
-# ÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇ
+# ──────────────────────────────────────────────
 # HTML Template
-# ÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇ
+# ──────────────────────────────────────────────
 
 HTML_TEMPLATE = """
 <!DOCTYPE html>
@@ -106,7 +106,7 @@ HTML_TEMPLATE = """
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>­ƒº¬ Chemistry Chatbot RGB</title>
+    <title>🧪 Chemistry Chatbot RGB</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -181,29 +181,29 @@ HTML_TEMPLATE = """
 <body>
     <div class="chat-container">
         <div class="chat-header">
-            ­ƒº¬ Chemistry Chatbot RGB
+            🧪 Chemistry Chatbot RGB
             <span>Your intelligent chemistry assistant</span>
         </div>
         <div class="chat-messages" id="chatMessages">
             <div class="message bot-msg">
-                ­ƒæï Hello! I'm <b>Chemistry Chatbot RGB</b>! I can help you with:
-                <br>­ƒö¼ Chemistry questions
-                <br>ÔÜù´©Å Chemical reactions
-                <br>­ƒº¼ Element & compound info
-                <br>­ƒôè Problem solving
+                👋 Hello! I'm <b>Chemistry Chatbot RGB</b>! I can help you with:
+                <br>🔬 Chemistry questions
+                <br>⚗️ Chemical reactions
+                <br>🧬 Element & compound info
+                <br>📊 Problem solving
                 <br><br>Try asking me something!
             </div>
         </div>
         <div class="quick-actions">
-            <button class="quick-btn" onclick="sendQuick('Tell me about hydrogen')">­ƒ½º Hydrogen</button>
-            <button class="quick-btn" onclick="sendQuick('What is H2O?')">­ƒÆº Water</button>
-            <button class="quick-btn" onclick="sendQuick('Balance: Fe + O2 -> Fe2O3')">ÔÜû´©Å Balance</button>
-            <button class="quick-btn" onclick="sendQuick('Explain the periodic table')">­ƒôï Periodic Table</button>
+            <button class="quick-btn" onclick="sendQuick('Tell me about hydrogen')">🫧 Hydrogen</button>
+            <button class="quick-btn" onclick="sendQuick('What is H2O?')">💧 Water</button>
+            <button class="quick-btn" onclick="sendQuick('Balance: Fe + O2 -> Fe2O3')">⚖️ Balance</button>
+            <button class="quick-btn" onclick="sendQuick('Explain the periodic table')">📋 Periodic Table</button>
         </div>
         <div class="chat-input">
             <input type="text" id="userInput" placeholder="Ask me a chemistry question..."
                    onkeypress="if(event.key==='Enter') sendMessage()">
-            <button onclick="sendMessage()">Send ­ƒÜÇ</button>
+            <button onclick="sendMessage()">Send 🚀</button>
         </div>
     </div>
     <script>
@@ -222,7 +222,7 @@ HTML_TEMPLATE = """
                 const data = await res.json();
                 addMessage(data.response, 'bot-msg');
             } catch (e) {
-                addMessage('ÔÜá´©Å Connection error. Please try again.', 'bot-msg');
+                addMessage('⚠️ Connection error. Please try again.', 'bot-msg');
             }
         }
         function sendQuick(msg) {
@@ -241,9 +241,9 @@ HTML_TEMPLATE = """
 </html>
 """
 
-# ÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇ
+# ──────────────────────────────────────────────
 # Flask Routes
-# ÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇ
+# ──────────────────────────────────────────────
 
 @app.route("/")
 def index():
@@ -257,7 +257,7 @@ def chat():
     user_message = data.get("message", "").strip()
 
     if not user_message:
-        return jsonify({"response": "Please enter a message! ­ƒº¬"})
+        return jsonify({"response": "Please enter a message! 🧪"})
 
     # Check for element lookup commands
     lower_msg = user_message.lower()
@@ -267,10 +267,10 @@ def chat():
         info = get_element_info(query)
         if info and "error" not in info:
             response = (
-                f"­ƒö¼ <b>{info['name']}</b> ({info['symbol']})<br>"
+                f"🔬 <b>{info['name']}</b> ({info['symbol']})<br>"
                 f"Atomic Number: {info['number']}<br>"
                 f"Atomic Mass: {info['mass']} u<br>"
-                f"Density: {info['density']} g/cm┬│"
+                f"Density: {info['density']} g/cm³"
             )
         else:
             response = get_chat_response(user_message)
@@ -280,7 +280,7 @@ def chat():
         info = get_compound_info(query)
         if info and "error" not in info:
             response = (
-                f"­ƒº¼ <b>{info['name']}</b><br>"
+                f"🧬 <b>{info['name']}</b><br>"
                 f"Formula: {info['molecular_formula']}<br>"
                 f"Molecular Weight: {info['molecular_weight']} g/mol<br>"
                 f"SMILES: {info['smiles']}<br>"
@@ -293,7 +293,7 @@ def chat():
         formula = user_message[5:].strip()
         result = calculate_molar_mass(formula)
         if isinstance(result, float):
-            response = f"ÔÜû´©Å Molar mass of <b>{formula}</b>: {result} g/mol"
+            response = f"⚖️ Molar mass of <b>{formula}</b>: {result} g/mol"
         else:
             response = get_chat_response(user_message)
 
@@ -318,13 +318,13 @@ def compound(name):
         return jsonify(info)
     return jsonify({"error": "Compound not found"}), 404
 
-# ÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇ
+# ──────────────────────────────────────────────
 # Main Entry Point
-# ÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇ
+# ──────────────────────────────────────────────
 
 if __name__ == "__main__":
     port = int(os.getenv("FLASK_PORT", 5000))
     debug = os.getenv("FLASK_DEBUG", "1") == "1"
-    print("­ƒº¬ Chemistry Chatbot RGB is starting...")
-    print(f"­ƒîÉ Open http://localhost:{port} in your browser")
+    print("🧪 Chemistry Chatbot RGB is starting...")
+    print(f"🌐 Open http://localhost:{port} in your browser")
     app.run(host="0.0.0.0", port=port, debug=debug)
