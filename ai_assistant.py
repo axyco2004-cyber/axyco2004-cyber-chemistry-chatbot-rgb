@@ -4,7 +4,7 @@ Integrates Google Gemini for comprehensive chemistry and materials science answe
 """
 
 import os
-import google.generativeai as genai
+from google import genai
 from knowledge_base import textbook_kb
 
 
@@ -14,14 +14,15 @@ class AIAssistant:
     def __init__(self):
         self.api_key = os.getenv("GEMINI_API_KEY")
         if self.api_key:
-            genai.configure(api_key=self.api_key)
-            self.model = genai.GenerativeModel('gemini-1.5-flash')  # Fast and free!
+            self.client = genai.Client(api_key=self.api_key)
+            self.model = 'gemini-2.5-flash'  # Fast and efficient!
         else:
+            self.client = None
             self.model = None
         
     def is_available(self) -> bool:
         """Check if AI assistant is available."""
-        return self.model is not None
+        return self.client is not None and self.model is not None
     
     def get_relevant_context(self, query: str) -> str:
         """Get relevant context from textbook and chemistry knowledge."""
@@ -93,7 +94,10 @@ Always be accurate and educational."""
             full_prompt = f"{system_prompt}\n\n=== User Question ===\n{user_message}\n\nProvide a complete, helpful answer:"
             
             # Generate response
-            response = self.model.generate_content(full_prompt)
+            response = self.client.models.generate_content(
+                model=self.model,
+                contents=full_prompt
+            )
             
             return response.text
             
@@ -115,7 +119,10 @@ Result: {result}
 
 Provide a brief, friendly explanation of what this result means."""
 
-            response = self.model.generate_content(prompt)
+            response = self.client.models.generate_content(
+                model=self.model,
+                contents=prompt
+            )
             
             return response.text
             
