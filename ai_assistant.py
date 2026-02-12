@@ -4,6 +4,7 @@ Integrates Google Gemini for comprehensive chemistry and materials science answe
 """
 
 import os
+import re
 from google import genai
 from knowledge_base import textbook_kb
 
@@ -105,7 +106,6 @@ Always be accurate and educational."""
                         conversation_text += f"User: {content}\n"
                     else:
                         # Strip HTML tags for cleaner context
-                        import re
                         clean_content = re.sub('<[^<]+?>', '', content)
                         conversation_text += f"Assistant: {clean_content}\n"
                 conversation_text += "\n"

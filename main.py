@@ -307,8 +307,14 @@ HTML_TEMPLATE = """
             const input = document.getElementById('userInput');
             const msg = input.value.trim();
             if (!msg) return;
+            
+            // Add user message
             addMessage(msg, 'user-msg');
             input.value = '';
+            
+            // Show thinking indicator
+            const thinkingId = 'thinking-' + Date.now();
+            addMessage('🤔 Thinking...', 'bot-msg', thinkingId);
             
             // Add user message to history
             conversationHistory.push({role: 'user', content: msg});
@@ -322,7 +328,18 @@ HTML_TEMPLATE = """
                         history: conversationHistory
                     })
                 });
+                
+                if (!res.ok) {
+                    throw new Error(`Server returned ${res.status}`);
+                }
+                
                 const data = await res.json();
+                
+                // Remove thinking indicator
+                const thinkingEl = document.getElementById(thinkingId);
+                if (thinkingEl) thinkingEl.remove();
+                
+                // Add bot response
                 addMessage(data.response, 'bot-msg');
                 
                 // Add bot response to history
@@ -332,18 +349,27 @@ HTML_TEMPLATE = """
                 if (conversationHistory.length > 20) {
                     conversationHistory = conversationHistory.slice(-20);
                 }
+                
+                console.log('Conversation history:', conversationHistory.length, 'messages');
+                
             } catch (e) {
-                addMessage('⚠️ Connection error. Please try again.', 'bot-msg');
+                console.error('Chat error:', e);
+                // Remove thinking indicator
+                const thinkingEl = document.getElementById(thinkingId);
+                if (thinkingEl) thinkingEl.remove();
+                
+                addMessage('⚠️ Connection error. Please try again. ' + e.message, 'bot-msg');
             }
         }
         function sendQuick(msg) {
             document.getElementById('userInput').value = msg;
             sendMessage();
         }
-        function addMessage(text, cls) {
+        function addMessage(text, cls, id) {
             const div = document.createElement('div');
             div.className = 'message ' + cls;
             div.innerHTML = text;
+            if (id) div.id = id;
             document.getElementById('chatMessages').appendChild(div);
             div.scrollIntoView({behavior: 'smooth'});
         }
