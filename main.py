@@ -1,10 +1,10 @@
 import os
 from flask import Flask, request, jsonify, render_template_string
-from openai import OpenAI
 from dotenv import load_dotenv
 import periodictable
 import pubchempy as pcp
 import numpy as np
+import google.generativeai as genai
 
 # Load environment variables
 load_dotenv()
@@ -12,8 +12,9 @@ load_dotenv()
 app = Flask(__name__)
 app.secret_key = os.getenv("SECRET_KEY", "default-secret-key")
 
-# Initialize OpenAI client
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+# Initialize Gemini client
+genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
+model = genai.GenerativeModel('gemini-pro')
 
 # ──────────────────────────────────────────────
 # Chemistry Helper Functions
@@ -81,18 +82,17 @@ def get_chat_response(user_message, conversation_history=None):
     if conversation_history is None:
         conversation_history = []
 
-    messages = [{"role": "system", "content": SYSTEM_PROMPT}]
-    messages.extend(conversation_history)
-    messages.append({"role": "user", "content": user_message})
+    # Build the prompt with system context and conversation history
+    full_prompt = SYSTEM_PROMPT + "\n\n"
+    for msg in conversation_history:
+        role = msg.get("role", "user")
+        content = msg.get("content", "")
+        full_prompt += f"{role.upper()}: {content}\n"
+    full_prompt += f"USER: {user_message}\nASSISTANT:"
 
     try:
-        response = client.chat.completions.create(
-            model="gpt-3.5-turbo",
-            messages=messages,
-            max_tokens=1024,
-            temperature=0.7,
-        )
-        return response.choices[0].message.content
+        response = model.generate_content(full_prompt)
+        return response.text
     except Exception as e:
         return f"⚠️ Error: {str(e)}"
 
