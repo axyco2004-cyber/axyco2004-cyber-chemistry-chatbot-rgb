@@ -43,9 +43,7 @@ This project is configured for Vercel using the Python runtime. The entrypoint i
 
 1. Push your changes to GitHub.
 2. In Vercel, import the repository and deploy.
-3. Add environment variables in Vercel:
-   - `GEMINI_API_KEY` (required) - Get your free API key at [aistudio.google.com](https://aistudio.google.com/app/apikey)
-   - `SECRET_KEY` (optional)
+3. No API keys required - the chatbot has built-in chemistry knowledge!
 4. Deploy and open the assigned Vercel URL.
 
 ## 🤝 Contributing

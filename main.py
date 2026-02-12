@@ -4,18 +4,12 @@ from dotenv import load_dotenv
 import periodictable
 import pubchempy as pcp
 import numpy as np
-import requests
-import json
 
 # Load environment variables
 load_dotenv()
 
 app = Flask(__name__)
 app.secret_key = os.getenv("SECRET_KEY", "default-secret-key")
-
-# Gemini API configuration
-GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
-GEMINI_API_URL = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key={GEMINI_API_KEY}"
 
 # ──────────────────────────────────────────────
 # Chemistry Helper Functions
@@ -79,61 +73,58 @@ Always be accurate, educational, and encouraging. Use emojis to make learning fu
 If you're unsure about something, say so rather than guessing."""
 
 def get_chat_response(user_message, conversation_history=None):
-    """Get a response from the AI model with fallback responses."""
+    """Get a response from the chatbot with built-in chemistry knowledge."""
     if conversation_history is None:
         conversation_history = []
 
-    # Simple fallback responses for common questions
     lower_msg = user_message.lower()
     
-    # Check for common chemistry questions with built-in responses
-    if "water" in lower_msg or "h2o" in lower_msg:
-        return "💧 Water (H₂O) is a chemical compound made of two hydrogen atoms and one oxygen atom. It's essential for life and has a bent molecular shape. Try 'compound: water' for more details!"
-    elif "hydrogen" in lower_msg and not lower_msg.startswith("element:"):
-        return "🫧 Hydrogen is the lightest and most abundant element in the universe! It's a colorless, odorless gas with symbol H and atomic number 1. Try 'element: hydrogen' for full details!"
-    elif "periodic table" in lower_msg:
-        return "📋 The Periodic Table organizes all known elements by atomic number, electron configuration, and chemical properties. Elements are arranged in rows (periods) and columns (groups). Use 'element: [name]' to learn about specific elements!"
-    elif "balance" in lower_msg or "equation" in lower_msg:
-        return "⚖️ To balance chemical equations, ensure the number of atoms of each element is equal on both sides. For example: 2H₂ + O₂ → 2H₂O. What equation would you like help with?"
+    # Water/H2O questions
+    if "water" in lower_msg or "h2o" in lower_msg or "h₂o" in lower_msg:
+        return "💧 <b>Water (H₂O)</b> is a chemical compound made of two hydrogen atoms and one oxygen atom. It's essential for life, has a bent molecular shape (104.5° bond angle), and is an excellent solvent. Molecular weight: 18.015 g/mol. Try 'compound: water' for more details!"
     
-    # Try Gemini API for other questions
-    try:
-        if not GEMINI_API_KEY:
-            return "⚠️ For advanced questions, please set GEMINI_API_KEY. Meanwhile, try: 'element: [name]', 'compound: [name]', or 'mass: [formula]'"
-        
-        # Build the prompt
-        full_prompt = SYSTEM_PROMPT + "\n\n"
-        for msg in conversation_history:
-            role = msg.get("role", "user")
-            content = msg.get("content", "")
-            full_prompt += f"{role.upper()}: {content}\n"
-        full_prompt += f"USER: {user_message}\nASSISTANT:"
-        
-        payload = {
-            "contents": [{
-                "parts": [{"text": full_prompt}]
-            }]
-        }
-        
-        response = requests.post(
-            GEMINI_API_URL,
-            headers={"Content-Type": "application/json"},
-            json=payload,
-            timeout=30
-        )
-        
-        if response.status_code == 200:
-            result = response.json()
-            if "candidates" in result and len(result["candidates"]) > 0:
-                text = result["candidates"][0]["content"]["parts"][0]["text"]
-                return text
-            else:
-                return "🧪 I'm having trouble with my AI connection. Try these commands: 'element: oxygen', 'compound: glucose', or 'mass: NaCl'"
+    # Hydrogen questions
+    elif ("hydrogen" in lower_msg or "h" == lower_msg.strip()) and not lower_msg.startswith("element:"):
+        return "🫧 <b>Hydrogen (H)</b> is the lightest and most abundant element in the universe! It's a colorless, odorless, highly flammable gas. Atomic number: 1, Atomic mass: 1.008 u. It forms water when combined with oxygen. Try 'element: hydrogen' for complete details!"
+    
+    # Periodic table questions
+    elif "periodic table" in lower_msg:
+        return "📋 <b>The Periodic Table</b> organizes all 118 known chemical elements by atomic number, electron configuration, and recurring chemical properties. Elements are arranged in rows (periods) and columns (groups/families). It was created by Dmitri Mendeleev in 1869. Use 'element: [name]' to learn about specific elements!"
+    
+    # Balance/equation questions
+    elif "balance" in lower_msg or "equation" in lower_msg:
+        if "fe" in lower_msg and "o2" in lower_msg:
+            return "⚖️ To balance <b>Fe + O₂ → Fe₂O₃</b>:<br>4Fe + 3O₂ → 2Fe₂O₃<br><br>Remember: Count atoms on each side and adjust coefficients until equal!"
         else:
-            return f"🧪 I'm here to help! Try: 'element: carbon' for element info, 'compound: ethanol' for compound details, or ask about common chemistry topics!"
-            
-    except Exception as e:
-        return "🧪 I'm your chemistry assistant! Use 'element: [name]' for element info, 'compound: [name]' for compounds, or 'mass: [formula]' to calculate molar mass. What would you like to know?"
+            return "⚖️ <b>Balancing Chemical Equations:</b><br>1. Count atoms of each element on both sides<br>2. Adjust coefficients (not subscripts)<br>3. Start with the most complex molecule<br>4. Balance remaining elements<br>Example: 2H₂ + O₂ → 2H₂O<br><br>What equation would you like help with?"
+    
+    # Oxygen questions
+    elif "oxygen" in lower_msg and not lower_msg.startswith("element:"):
+        return "💨 <b>Oxygen (O)</b> is essential for life and combustion! Atomic number: 8, makes up 21% of Earth's atmosphere. It's highly reactive and forms oxides with most elements. Try 'element: oxygen' for full details!"
+    
+    # Carbon questions
+    elif "carbon" in lower_msg and not lower_msg.startswith("element:"):
+        return "⚫ <b>Carbon (C)</b> is the basis of all organic chemistry and life! Atomic number: 6. It can form millions of compounds due to its ability to bond with itself and other elements. Found in diamonds, graphite, and all living things. Try 'element: carbon' for more!"
+    
+    # Chemical reaction questions
+    elif "reaction" in lower_msg or "react" in lower_msg:
+        return "⚗️ <b>Chemical Reactions</b> occur when substances interact to form new products. Types include:<br>• Synthesis (A + B → AB)<br>• Decomposition (AB → A + B)<br>• Single replacement<br>• Double replacement<br>• Combustion<br><br>What type of reaction are you interested in?"
+    
+    # pH questions
+    elif "ph" in lower_msg or "acid" in lower_msg or "base" in lower_msg:
+        return "🧪 <b>pH Scale</b> measures acidity/basicity from 0-14:<br>• pH < 7: Acidic (lemon juice, vinegar)<br>• pH = 7: Neutral (pure water)<br>• pH > 7: Basic/Alkaline (soap, bleach)<br><br>pH = -log[H⁺]. Each unit is 10x difference in H⁺ concentration!"
+    
+    # Molecule/molecular questions
+    elif "molecule" in lower_msg or "molecular" in lower_msg:
+        return "🧬 <b>Molecules</b> are two or more atoms bonded together. Examples:<br>• H₂O (water): bent shape<br>• CO₂ (carbon dioxide): linear<br>• CH₄ (methane): tetrahedral<br>• NH₃ (ammonia): trigonal pyramidal<br><br>Use 'compound: [name]' for specific molecules!"
+    
+    # General chemistry question
+    elif "chemistry" in lower_msg or "help" in lower_msg or "what can you" in lower_msg:
+        return "🧪 <b>I'm your Chemistry Assistant!</b> I can help with:<br>• Element info: 'element: sodium'<br>• Compound details: 'compound: ethanol'<br>• Molar mass: 'mass: NaCl'<br>• Balancing equations<br>• Periodic table info<br>• Chemical reactions<br>• pH and acids/bases<br><br>Ask me anything about chemistry!"
+    
+    # Default helpful response
+    else:
+        return f"🧪 Interesting question about '{user_message}'! Try these commands:<br>• <b>element:</b> [name] - Get element info<br>• <b>compound:</b> [name] - Get compound details<br>• <b>mass:</b> [formula] - Calculate molar mass<br><br>Or ask about: water, hydrogen, periodic table, balancing equations, pH, or molecules!"
 
 # ──────────────────────────────────────────────
 # HTML Template

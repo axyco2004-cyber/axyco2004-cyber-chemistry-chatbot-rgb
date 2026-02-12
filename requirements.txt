@@ -1,5 +1,4 @@
 flask>=3.0.0
-requests>=2.31.0
 numpy>=1.26.0
 pubchempy>=1.0.4
 periodictable>=1.7.0
