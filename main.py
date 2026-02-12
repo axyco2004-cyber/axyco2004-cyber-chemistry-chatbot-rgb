@@ -301,20 +301,37 @@ HTML_TEMPLATE = """
         </div>
     </div>
     <script>
+        let conversationHistory = [];
+        
         async function sendMessage() {
             const input = document.getElementById('userInput');
             const msg = input.value.trim();
             if (!msg) return;
             addMessage(msg, 'user-msg');
             input.value = '';
+            
+            // Add user message to history
+            conversationHistory.push({role: 'user', content: msg});
+            
             try {
                 const res = await fetch('/chat', {
                     method: 'POST',
                     headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({message: msg})
+                    body: JSON.stringify({
+                        message: msg,
+                        history: conversationHistory
+                    })
                 });
                 const data = await res.json();
                 addMessage(data.response, 'bot-msg');
+                
+                // Add bot response to history
+                conversationHistory.push({role: 'assistant', content: data.response});
+                
+                // Keep history limited to last 10 exchanges (20 messages)
+                if (conversationHistory.length > 20) {
+                    conversationHistory = conversationHistory.slice(-20);
+                }
             } catch (e) {
                 addMessage('⚠️ Connection error. Please try again.', 'bot-msg');
             }
@@ -349,6 +366,7 @@ def chat():
     """Handle chat messages."""
     data = request.get_json()
     user_message = data.get("message", "").strip()
+    conversation_history = data.get("history", [])
 
     if not user_message:
         return jsonify({"response": "Please enter a message! 🧪"})
@@ -494,7 +512,7 @@ def chat():
             response = f"❌ <b>Calculation Error:</b> {str(e)}<br><br>📝 <b>Format:</b> calc: type | param1=value | param2=value<br>Example: calc: moles_to_grams | formula=H2O | moles=2"
 
     else:
-        response = get_chat_response(user_message)
+        response = get_chat_response(user_message, conversation_history)
 
     return jsonify({"response": response})
 

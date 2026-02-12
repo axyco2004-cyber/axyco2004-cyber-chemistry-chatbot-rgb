@@ -83,6 +83,7 @@ Your role:
 - Use emojis to make learning engaging
 - If calculations are needed, show the setup and guide users to use the calc: commands
 - Keep responses concise but complete (3-5 sentences for simple questions, more for complex ones)
+- Remember previous messages in the conversation and provide contextual responses
 
 Always be accurate and educational."""
 
@@ -90,13 +91,32 @@ Always be accurate and educational."""
             if context:
                 system_prompt += f"\n\n=== AVAILABLE CONTEXT ===\n{context}"
             
-            # Build full prompt
-            full_prompt = f"{system_prompt}\n\n=== User Question ===\n{user_message}\n\nProvide a complete, helpful answer:"
+            # Build conversation context with history
+            conversation_text = f"{system_prompt}\n\n"
+            
+            # Add conversation history if available
+            if conversation_history and len(conversation_history) > 1:
+                conversation_text += "=== Conversation History ===\n"
+                # Include last few exchanges for context (skip the current message)
+                for msg in conversation_history[-6:-1]:  # Last 3 exchanges
+                    role = msg.get('role', 'user')
+                    content = msg.get('content', '')
+                    if role == 'user':
+                        conversation_text += f"User: {content}\n"
+                    else:
+                        # Strip HTML tags for cleaner context
+                        import re
+                        clean_content = re.sub('<[^<]+?>', '', content)
+                        conversation_text += f"Assistant: {clean_content}\n"
+                conversation_text += "\n"
+            
+            # Add current question
+            conversation_text += f"=== Current Question ===\nUser: {user_message}\n\nProvide a complete, helpful answer:"
             
             # Generate response
             response = self.client.models.generate_content(
                 model=self.model,
-                contents=full_prompt
+                contents=conversation_text
             )
             
             return response.text
