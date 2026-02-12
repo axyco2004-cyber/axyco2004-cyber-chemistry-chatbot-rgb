@@ -4,7 +4,8 @@ from dotenv import load_dotenv
 import periodictable
 import pubchempy as pcp
 import numpy as np
-import google.generativeai as genai
+import requests
+import json
 
 # Load environment variables
 load_dotenv()
@@ -12,13 +13,9 @@ load_dotenv()
 app = Flask(__name__)
 app.secret_key = os.getenv("SECRET_KEY", "default-secret-key")
 
-# Initialize Gemini client
-gemini_api_key = os.getenv("GEMINI_API_KEY")
-if gemini_api_key:
-    genai.configure(api_key=gemini_api_key)
-    model = genai.GenerativeModel('gemini-1.0-pro')
-else:
-    model = None
+# Gemini API configuration
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+GEMINI_API_URL = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key={GEMINI_API_KEY}"
 
 # ──────────────────────────────────────────────
 # Chemistry Helper Functions
@@ -95,10 +92,32 @@ def get_chat_response(user_message, conversation_history=None):
     full_prompt += f"USER: {user_message}\nASSISTANT:"
 
     try:
-        if model is None:
+        if not GEMINI_API_KEY:
             return "⚠️ API key not configured. Please set GEMINI_API_KEY environment variable."
-        response = model.generate_content(full_prompt)
-        return response.text
+        
+        payload = {
+            "contents": [{
+                "parts": [{"text": full_prompt}]
+            }]
+        }
+        
+        response = requests.post(
+            GEMINI_API_URL,
+            headers={"Content-Type": "application/json"},
+            json=payload,
+            timeout=30
+        )
+        
+        if response.status_code == 200:
+            result = response.json()
+            if "candidates" in result and len(result["candidates"]) > 0:
+                text = result["candidates"][0]["content"]["parts"][0]["text"]
+                return text
+            else:
+                return "⚠️ No response generated."
+        else:
+            return f"⚠️ API Error: {response.status_code} - {response.text}"
+            
     except Exception as e:
         return f"⚠️ Error: {str(e)}"
 
