@@ -13,8 +13,12 @@ app = Flask(__name__)
 app.secret_key = os.getenv("SECRET_KEY", "default-secret-key")
 
 # Initialize Gemini client
-genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
-model = genai.GenerativeModel('models/gemini-pro')
+gemini_api_key = os.getenv("GEMINI_API_KEY")
+if gemini_api_key:
+    genai.configure(api_key=gemini_api_key)
+    model = genai.GenerativeModel('gemini-1.0-pro')
+else:
+    model = None
 
 # ──────────────────────────────────────────────
 # Chemistry Helper Functions
@@ -91,6 +95,8 @@ def get_chat_response(user_message, conversation_history=None):
     full_prompt += f"USER: {user_message}\nASSISTANT:"
 
     try:
+        if model is None:
+            return "⚠️ API key not configured. Please set GEMINI_API_KEY environment variable."
         response = model.generate_content(full_prompt)
         return response.text
     except Exception as e:
